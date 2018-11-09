@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+        <!DOCTYPE manifest [
+                <!ELEMENT manifest (mainactivity*, attribute, application*)>
+
+                <!ELEMENT application (title, main, description, price, author, version, icon)>
+                <!ELEMENT title (#PCDATA)>
+                <!ELEMENT main (#PCDATA)>
+                <!ELEMENT description (#PCDATA)>
+                <!ELEMENT author (#PCDATA)>
+                <!ELEMENT version (#PCDATA)>
+                <!ELEMENT icon (#PCDATA)>
+                <!ELEMENT price (#PCDATA)>
+
+                <!ELEMENT attribute EMPTY>
+                <!ATTLIST attribute type CDATA #REQUIRED>
+
+                <!ELEMENT mainactivity (name, class)>
+                <!ELEMENT name (#PCDATA)>
+                <!ELEMENT class (#PCDATA)>
+
+        ]>
