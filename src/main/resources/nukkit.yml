@@ -1,0 +1,7 @@
+name: CPhone
+main: net.comorevi.cphone.plugin.Main
+version: 1.0.0
+load: POSTWORLD
+author: popkechupki
+api: ["1.0.0"]
+description: "The next step for CPhone"

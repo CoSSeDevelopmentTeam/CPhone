@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE manifest SYSTEM "https://raw.githubusercontent.com/CoSSeDevelopmentTeam/CPhone/master/CPhoneManifest.dtd">
+
+<manifest>
+    <application>
+        <title>テストアプリケーション</title>
+        <description>テスト用アプリ</description>
+        <author>itsu</author>
+        <version>1.0.0</version>
+        <mcbeversion>1.6.1</mcbeversion>
+        <icon>null</icon>
+        <price>10</price>
+    </application>
+
+    <attribute type = "default" />
+
+    <activity>
+        <name>MainActivity</name>
+        <main>net.comorevi.test</main>
+    </activity>
+</manifest>
