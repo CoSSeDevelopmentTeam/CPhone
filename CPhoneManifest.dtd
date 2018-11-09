@@ -3,20 +3,20 @@
         <!DOCTYPE manifest [
                 <!ELEMENT manifest (mainactivity*, attribute, application*)>
 
-                <!ELEMENT application (title, main, description, price, author, version, icon)>
+                <!ELEMENT application (title, description, price, author, version, mcbeversion, icon)>
                 <!ELEMENT title (#PCDATA)>
-                <!ELEMENT main (#PCDATA)>
                 <!ELEMENT description (#PCDATA)>
                 <!ELEMENT author (#PCDATA)>
                 <!ELEMENT version (#PCDATA)>
+                <!ELEMENT mcbeversion (#PCDATA)>
                 <!ELEMENT icon (#PCDATA)>
                 <!ELEMENT price (#PCDATA)>
 
                 <!ELEMENT attribute EMPTY>
                 <!ATTLIST attribute type CDATA #REQUIRED>
 
-                <!ELEMENT mainactivity (name, class)>
+                <!ELEMENT mainactivity (name, main)>
                 <!ELEMENT name (#PCDATA)>
-                <!ELEMENT class (#PCDATA)>
+                <!ELEMENT main (#PCDATA)>
 
         ]>
