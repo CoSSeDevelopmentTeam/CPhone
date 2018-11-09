@@ -3,8 +3,8 @@ package net.comorevi.cphone.plugin;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.plugin.PluginBase;
-import net.comorevi.cphone.cphone.core.Kernel;
-import net.comorevi.cphone.data.SharingData;
+import net.comorevi.cphone.cphone.core.KernelManager;
+import net.comorevi.cphone.presenter.SharingData;
 
 import java.io.File;
 
@@ -17,9 +17,8 @@ public class Main extends PluginBase {
 
         SharingData.pluginInstance = this;
         SharingData.server = getServer();
-        SharingData.kernel = new Kernel(new File("./"), new File(getServer().getPluginPath()));
 
-        SharingData.kernel.start();
+        KernelManager.startKernel(new File("./"), new File(getServer().getPluginPath()));
     }
 
     @Override

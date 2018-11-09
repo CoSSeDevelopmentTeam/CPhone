@@ -1,11 +1,11 @@
 package net.comorevi.cphone.cphone.core;
 
-import net.comorevi.cphone.data.RuntimeData;
-import net.comorevi.cphone.data.SharingData;
+import net.comorevi.cphone.cphone.data.RuntimeData;
+import net.comorevi.cphone.presenter.SharingData;
 
 import java.io.File;
 
-public class Kernel implements Runnable {
+class Kernel implements Runnable {
 
     public Kernel(File nukkitDirectory, File pluginDirectory) {
         RuntimeData.nukkitDirectory = nukkitDirectory;

@@ -1,4 +1,4 @@
-package net.comorevi.cphone.data;
+package net.comorevi.cphone.cphone.data;
 
 import java.io.File;
 
