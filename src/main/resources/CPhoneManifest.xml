@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE manifest SYSTEM "https://raw.githubusercontent.com/CoSSeDevelopmentTeam/CPhone/master/CPhoneManifest.dtd">
+<!--<!DOCTYPE manifest SYSTEM "https://raw.githubusercontent.com/CoSSeDevelopmentTeam/CPhone/master/CPhoneManifest.dtd">-->
 
 <manifest>
     <application>
@@ -12,7 +12,7 @@
         <price>10</price>
     </application>
 
-    <attribute type = "default" />
+    <permission type = "default" />
 
     <activity>
         <name>MainActivity</name>

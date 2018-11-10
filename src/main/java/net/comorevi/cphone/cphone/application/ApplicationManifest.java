@@ -11,17 +11,11 @@ public class ApplicationManifest implements Serializable {
     private String description;
     private String author;
     private String icon;
+    private ApplicationPermission permission;
     private int price;
 
-    public ApplicationManifest(String title, String main, String description, String version, String mcbeVersion, String author, String icon, int price) {
-        this.title = title;
-        this.main = main;
-        this.description = description;
-        this.version = version;
-        this.mcbeVersion = mcbeVersion;
-        this.author = author;
-        this.icon = icon;
-        this.price = price;
+    public ApplicationManifest() {
+
     }
 
     public String getTitle() {
@@ -60,7 +54,7 @@ public class ApplicationManifest implements Serializable {
         return description;
     }
 
-    public void setDecription(String decription) {
+    public void setDescription(String decription) {
         this.description = decription;
     }
 
@@ -86,5 +80,28 @@ public class ApplicationManifest implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public ApplicationPermission getPermission() {
+        return permission;
+    }
+
+    public void setPermission(ApplicationPermission attribute) {
+        this.permission = attribute;
+    }
+
+    @Override
+    public String toString() {
+        return "ApplicationManifest{" +
+                "title='" + title + '\'' +
+                ", version='" + version + '\'' +
+                ", mcbeVersion='" + mcbeVersion + '\'' +
+                ", main='" + main + '\'' +
+                ", description='" + description + '\'' +
+                ", author='" + author + '\'' +
+                ", icon='" + icon + '\'' +
+                ", permission='" + permission.getName() + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

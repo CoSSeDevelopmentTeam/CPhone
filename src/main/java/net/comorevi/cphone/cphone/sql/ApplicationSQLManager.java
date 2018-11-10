@@ -1,58 +1,77 @@
 package net.comorevi.cphone.cphone.sql;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import net.comorevi.cphone.cphone.application.ApplicationPermission;
+import net.comorevi.cphone.cphone.application.ApplicationManifest;
 import net.comorevi.cphone.cphone.data.RuntimeData;
+import net.comorevi.cphone.cphone.exception.PermissionException;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-class ApplicationSQLManager {
+public class ApplicationSQLManager {
 
     private static Connection conn = null;
     private static String connname;
 
-    static boolean init() {
+    private static boolean inited;
+
+    public static boolean init() {
         try {
-            Class.forName("org.sqlite.JDBC");
-            connname = "jdbc:sqlite://" + RuntimeData.currentDirectory + "Applications.db";
-            conn = DriverManager.getConnection(connname);
+            if (!inited) {
+                inited = true;
 
-            int count;
-            String sql =
-                    "CREATE TABLE IF NOT EXISTS application + (" +
-                    "name TEXT NOT NULL, " +
-                    "main TEXT NOT NULL, " +
-                    "version TEXT NOT NULL, " +
-                    "jar TEXT NOT NULL";
+                Class.forName("org.sqlite.JDBC");
+                connname = "jdbc:sqlite://" + RuntimeData.currentDirectory + "Applications.db";
+                conn = DriverManager.getConnection(connname);
 
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setQueryTimeout(10);
-            count = stmt.executeUpdate();
-            stmt.close();
+                int count;
+                String sql =
+                        "CREATE TABLE IF NOT EXISTS user + (" +
+                                "name TEXT NOT NULL, " +
+                                "applications TEXT NOT NULL, " +
+                                "permission TEXT NOT NULL, " +
+                                "notices TEXT NOT NULL, " +
+                                "read INTEGER" +
+                                ")";
 
-            return (count > 0);
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setQueryTimeout(10);
+                count = stmt.executeUpdate();
+                stmt.close();
+
+                return (count > 0);
+
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    static boolean addApplication(String name, String main, String version, String jar) {
+    public static boolean addUser(String name, ApplicationPermission attribute) {
         try {
             int count;
             String sql =
                     "INSERT INTO " +
-                    "application (name, main, version, jar) " +
-                    "VALUES (?, ?, ?, ?)";
+                    "user (" +
+                        "name, applications, permission, notices, read" +
+                    ") VALUES (" +
+                        "?, ?, ?, ?, ?" +
+                    ")";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setQueryTimeout(10);
 
             stmt.setString(1, name);
-            stmt.setString(2, main);
-            stmt.setString(3, version);
-            stmt.setString(4, jar);
+            stmt.setString(2, "[]");
+            stmt.setString(3, attribute.getName());
+            stmt.setString(4, "{}");
+            stmt.setInt(5, fromBoolean(true));
 
             count = stmt.executeUpdate();
             stmt.close();
@@ -64,10 +83,10 @@ class ApplicationSQLManager {
         }
     }
 
-    static boolean deleteApplication(String name) {
+    public static boolean deleteUser(String name) {
         try {
             int count;
-            String sql = "DELETE FROM application WHERE name = ?";
+            String sql = "DELETE FROM user WHERE name = ?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setQueryTimeout(10);
@@ -83,18 +102,25 @@ class ApplicationSQLManager {
         }
     }
 
-    static boolean updateApplication(String name, String main, String version, String jar) {
+    public static boolean installApplication(String name, ApplicationManifest manifest) {
         try {
             int count;
-            String sql = "UPDATE application SET (main = ?, version = ?, jar = ?) WHERE name = ?";
+            String sql = "UPDATE user SET applications = ? WHERE name = ?";
+
+            List<String> applications = getApplications(name);
+            if (applications.contains(manifest.getTitle())) return false;
+
+            if (getPermission(name) != manifest.getPermission()) {
+                throw new PermissionException("Permission denied [" + name + "]: " + getPermission(name).getName() + ", Required: " + manifest.getPermission().getName());
+            }
+
+            applications.add(manifest.getTitle());
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setQueryTimeout(10);
 
-            stmt.setString(1, main);
-            stmt.setString(2, version);
-            stmt.setString(3, jar);
-            stmt.setString(4, name);
+            stmt.setString(1, manifest.getTitle());
+            stmt.setString(2, name);
 
             count = stmt.executeUpdate();
             stmt.close();
@@ -106,5 +132,152 @@ class ApplicationSQLManager {
         }
     }
 
+    public static boolean unInstallApplication(String name, ApplicationManifest manifest) {
+        try {
+            int count;
+            String sql = "UPDATE user SET applications = ? WHERE name = ?";
+
+            List<String> applications = getApplications(name);
+            if (!applications.contains(manifest.getTitle())) return false;
+
+            applications.remove(manifest.getTitle());
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setQueryTimeout(10);
+
+            stmt.setString(1, manifest.getTitle());
+            stmt.setString(2, name);
+
+            count = stmt.executeUpdate();
+            stmt.close();
+
+            return (count > 0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean setPermission(String name, ApplicationPermission attribute) {
+        try {
+            int count;
+            String sql = "UPDATE user SET permission = ? WHERE name = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setQueryTimeout(10);
+
+            stmt.setString(1, attribute.getName());
+            stmt.setString(2, name);
+
+            count = stmt.executeUpdate();
+            stmt.close();
+
+            return (count > 0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public static boolean setRead(String name, boolean read) {
+        try {
+            int count;
+            String sql = "UPDATE user SET read = ? WHERE name = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setQueryTimeout(10);
+
+            stmt.setInt(1, fromBoolean(read));
+            stmt.setString(2, name);
+
+            count = stmt.executeUpdate();
+            stmt.close();
+
+            return (count > 0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public static List<String> getApplications(String name) {
+        try {
+            String sql = "SELECT applications FROM user WHERE name = ?";
+            String json = "";
+            List<String> applications = new ArrayList<>();
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setQueryTimeout(10);
+            stmt.setString(1, name);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) json = rs.getString("applications");
+            stmt.close();
+
+            applications = new Gson().fromJson(json, new TypeToken<List<String>>(){}.getType());
+
+            return applications;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ApplicationPermission getPermission(String name) {
+        try {
+            String sql = "SELECT permission FROM user WHERE name = ?";
+            ApplicationPermission result = null;
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setQueryTimeout(10);
+            stmt.setString(1, name);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) result = ApplicationPermission.fromName(rs.getString("result"));
+            stmt.close();
+
+            return result;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static boolean isRead(String name) {
+        try {
+            String sql = "SELECT read FROM user WHERE name = ?";
+            int result = 0;
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setQueryTimeout(10);
+            stmt.setString(1, name);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) result = rs.getInt("read");
+            stmt.close();
+
+            return toBoolean(result);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 0: true
+     * 1: false
+     * @param bool
+     * @return
+     */
+    private static int fromBoolean(boolean bool) {
+        return bool ? 0 : 1;
+    }
+
+    private static boolean toBoolean(int i) {
+        return (i == 0);
+    }
 
 }

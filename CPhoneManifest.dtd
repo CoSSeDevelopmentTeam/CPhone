@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
         <!DOCTYPE manifest [
-                <!ELEMENT manifest (mainactivity*, attribute, application*)>
+                <!ELEMENT manifest (mainactivity*, permission, application)>
 
                 <!ELEMENT application (title, description, price, author, version, mcbeversion, icon)>
                 <!ELEMENT title (#PCDATA)>
@@ -12,8 +12,8 @@
                 <!ELEMENT icon (#PCDATA)>
                 <!ELEMENT price (#PCDATA)>
 
-                <!ELEMENT attribute EMPTY>
-                <!ATTLIST attribute type CDATA #REQUIRED>
+                <!ELEMENT permission EMPTY>
+                <!ATTLIST permission type CDATA #REQUIRED>
 
                 <!ELEMENT mainactivity (name, main)>
                 <!ELEMENT name (#PCDATA)>
