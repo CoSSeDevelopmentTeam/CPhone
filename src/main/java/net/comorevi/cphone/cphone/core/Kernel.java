@@ -2,6 +2,7 @@ package net.comorevi.cphone.cphone.core;
 
 import net.comorevi.cphone.cphone.data.RuntimeData;
 import net.comorevi.cphone.cphone.sql.ApplicationSQLManager;
+import net.comorevi.cphone.cphone.utils.PropertiesConfig;
 import net.comorevi.cphone.presenter.SharingData;
 
 import java.io.File;
@@ -16,6 +17,8 @@ class Kernel implements Runnable {
         RuntimeData.currentDirectory = new File(pluginDirectory.getPath().replaceAll("\\\\", "/") + (pluginDirectory.getPath().replaceAll("\\\\", "/").endsWith("/") ? "" : "/") + "CPhone/");
 
         RuntimeData.currentDirectory.mkdirs();
+
+        prepareConfig(RuntimeData.currentDirectory + "configuration.properties");
 
         ApplicationSQLManager.init();
     }
@@ -32,6 +35,17 @@ class Kernel implements Runnable {
         RuntimeData.freeMemory = Runtime.getRuntime().freeMemory();
         RuntimeData.totalMemory = Runtime.getRuntime().totalMemory();
         RuntimeData.usingMemory = RuntimeData.totalMemory - RuntimeData.freeMemory;
+    }
+
+    private void prepareConfig(String path) {
+        PropertiesConfig conf  = new PropertiesConfig(path);
+        conf.set("SQLClass", "org.sqlite.JDBC");
+        conf.set("SQLEngine", "sqlite");
+        conf.set("ApplicationSQL", "${currentDir}/Applications.db");
+        conf.save();
+
+        RuntimeData.config = conf;
+        RuntimeData.config.load(path);
     }
 
     @Override

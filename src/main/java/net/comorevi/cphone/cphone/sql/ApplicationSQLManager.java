@@ -8,7 +8,6 @@ import net.comorevi.cphone.cphone.data.RuntimeData;
 import net.comorevi.cphone.cphone.exception.PermissionException;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicationSQLManager {
@@ -23,8 +22,8 @@ public class ApplicationSQLManager {
             if (!inited) {
                 inited = true;
 
-                Class.forName("org.sqlite.JDBC");
-                connname = "jdbc:sqlite://" + RuntimeData.currentDirectory + "Applications.db";
+                Class.forName(RuntimeData.config.getString("SQLClass"));
+                connname = "jdbc:" + RuntimeData.config.getString("SQLEngine") + "://" + RuntimeData.config.getString("ApplicationSQL");
                 conn = DriverManager.getConnection(connname);
 
                 int count;
@@ -204,7 +203,7 @@ public class ApplicationSQLManager {
         try {
             String sql = "SELECT applications FROM user WHERE name = ?";
             String json = "";
-            List<String> applications = new ArrayList<>();
+            List<String> applications;
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setQueryTimeout(10);
