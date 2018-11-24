@@ -38,4 +38,7 @@ public final class Bundle implements Serializable {
         return strings.get(name);
     }
 
+    public Map<String, String> getStrings() {
+        return strings;
+    }
 }
