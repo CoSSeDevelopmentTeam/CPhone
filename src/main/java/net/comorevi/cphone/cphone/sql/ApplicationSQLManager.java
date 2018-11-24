@@ -10,7 +10,7 @@ import net.comorevi.cphone.cphone.exception.PermissionException;
 import java.sql.*;
 import java.util.List;
 
-public class ApplicationSQLManager {
+public final class ApplicationSQLManager {
 
     private static Connection conn = null;
     private static String connname;

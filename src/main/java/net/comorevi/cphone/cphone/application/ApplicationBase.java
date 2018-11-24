@@ -2,10 +2,14 @@ package net.comorevi.cphone.cphone.application;
 
 public abstract class ApplicationBase implements Application {
 
-    public ApplicationBase() {
+    private ApplicationManifest manifest;
 
+    public ApplicationBase(ApplicationManifest manifest) {
+        this.manifest = manifest;
     }
 
-    public abstract String getName();
+    public ApplicationManifest getManifest() {
+        return manifest;
+    }
 
 }

@@ -2,6 +2,7 @@ package net.comorevi.cphone.cphone.core;
 
 import net.comorevi.cphone.cphone.application.ApplicationBase;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
+import net.comorevi.cphone.cphone.data.ApplicationData;
 import net.comorevi.cphone.cphone.utils.ManifestLoader;
 import net.comorevi.cphone.presenter.SharingData;
 
@@ -15,7 +16,7 @@ import java.util.jar.JarFile;
 
 class ApplicationLoader {
 
-    protected static Map<String, ApplicationManifest> load(String path) {
+    protected static Map<String, ApplicationManifest> loadAll(String path) {
         File appDir = new File(path);
         Map<String, ApplicationManifest> applications = new HashMap<>();
 

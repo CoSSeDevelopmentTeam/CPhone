@@ -1,0 +1,9 @@
+<strings>
+    <string name="cphone_title">しふぉん</string>
+    <string name="home_close">§c閉じる</string>
+    <string name="home_restartApp">§aアプリを再開</string>
+    <string name="home_applications">アプリ</string>
+    <string name="home_settings">設定</string>
+
+    <string name="message_home_closed">§a§oしふぉんを閉じました。</string>
+</strings>
