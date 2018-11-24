@@ -50,12 +50,15 @@ final class Kernel implements Runnable {
 
     private void prepareConfig(String path) {
         PropertiesConfig conf  = new PropertiesConfig(path);
-        conf.set("SQLClass", "org.sqlite.JDBC");
-        conf.set("SQLEngine", "sqlite");
-        conf.set("ApplicationSQL", "${currentDir}/Applications.db");
-        conf.set("TriggerItemId", 370);
-        conf.set("HomeText", "おしらせはありません。");
-        conf.save();
+
+        if (!new File(path).exists()) {
+            conf.set("SQLClass", "org.sqlite.JDBC");
+            conf.set("SQLEngine", "sqlite");
+            conf.set("ApplicationSQL", "${currentDir}/Applications.db");
+            conf.set("TriggerItemId", 370);
+            conf.set("HomeText", "おしらせはありません。");
+            conf.save();
+        }
 
         RuntimeData.config = conf;
         RuntimeData.config.load(path);

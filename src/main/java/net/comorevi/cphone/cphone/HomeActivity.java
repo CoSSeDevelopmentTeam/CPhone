@@ -50,7 +50,7 @@ public class HomeActivity extends ListActivity {
                 ApplicationListActivity applicationListActivity = new ApplicationListActivity(getManifest());
                 applicationListActivity.start(cPhone.getPlayer(), null);
                 break;
-                
+
             case 3:
                 break;
         }
