@@ -38,9 +38,6 @@ public class ActivityProcessor {
         ApplicationManifest manifest = ApplicationData.applications.get(appName);
 
         try {
-            System.out.println(new File(RuntimeData.currentDirectory + "/CPhone/app/" + manifest.getTitle() + ".jar").toURI().toURL());
-            System.out.println(SharingData.pluginInstance.getClass().getClassLoader().hashCode());
-
             Class<? extends ActivityBase> mainClass = new URLClassLoader(new URL[]{new File(RuntimeData.currentDirectory + "/app/" + manifest.getTitle() + ".jar").toURI().toURL()}, SharingData.pluginInstance.getClass().getClassLoader())
                     .loadClass(manifest.getMain())
                     .asSubclass(ActivityBase.class);
