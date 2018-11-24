@@ -1,14 +1,14 @@
 <strings>
     <string name="cphone_title">しふぉん</string>
     <string name="home_notification">おしらせ</string>
-    <string name="home_close">§c閉じる</string>
-    <string name="home_restartApp">§aアプリを再開</string>
+    <string name="home_close">§4閉じる</string>
+    <string name="home_restartApp">§2アプリを再開</string>
     <string name="home_applications">アプリ</string>
     <string name="home_settings">設定</string>
 
     <string name="message_home_nonotification">おしらせはありません。</string>
-    <string name="message_home_noback">§9実行されているアプリはありません。</string>
-    <string name="message_home_closed">§a§oしふぉんを閉じました。</string>]
-    <string name="message_application_error_start">§4アプリを実行中にエラーが発生しました。: </string>
+    <string name="message_home_noback">§b実行されているアプリはありません。</string>
+    <string name="message_home_closed">§7システム>>§a§oしふぉんを閉じました。</string>]
+    <string name="message_application_error_start">§eアプリを実行中にエラーが発生しました。: </string>
     <string name="message_application_info">アプリ一覧 </string>
 </strings>
