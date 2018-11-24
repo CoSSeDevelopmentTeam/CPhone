@@ -1,0 +1,14 @@
+<strings>
+    <string name="cphone_title">CoSSePhone</string>
+    <string name="home_notification">Notice</string>
+    <string name="home_close">§4Close</string>
+    <string name="home_restartApp">§2Resume app</string>
+    <string name="home_applications">Application</string>
+    <string name="home_settings">Settings</string>
+
+    <string name="message_home_nonotification">There is no notification.</string>
+    <string name="message_home_noback">§bThere is no application actually being done.</string>
+    <string name="message_home_closed">§7システム>>§a§oClosed CoSSePhone.</string>]
+    <string name="message_application_error_start">§eAn error occurred while executing the application.: </string>
+    <string name="message_application_info">アプリ一覧 </string>
+</strings>
