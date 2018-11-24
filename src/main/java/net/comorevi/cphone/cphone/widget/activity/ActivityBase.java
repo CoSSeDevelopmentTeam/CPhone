@@ -1,13 +1,17 @@
 package net.comorevi.cphone.cphone.widget.activity;
 
 import cn.nukkit.Player;
+import net.comorevi.cphone.cphone.CPhone;
 import net.comorevi.cphone.cphone.application.ApplicationBase;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
+import net.comorevi.cphone.cphone.data.RuntimeData;
 import net.comorevi.cphone.cphone.model.Bundle;
 import net.comorevi.cphone.cphone.model.Response;
 import net.comorevi.cphone.presenter.ActivityProcessor;
+import net.comorevi.cphone.presenter.SharingData;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public abstract class ActivityBase extends ApplicationBase implements Activity, Buildable, Serializable {
 
@@ -39,7 +43,8 @@ public abstract class ActivityBase extends ApplicationBase implements Activity, 
 
     }
 
-    public void start(Player player) {
+    public void start(Player player, Map<String, String> strings) {
+        this.onCreate(new Bundle(SharingData.phones.get(player.getName()), System.currentTimeMillis(), RuntimeData.currentDirectory, strings));
         send(player);
         this.onStart();
     }

@@ -18,17 +18,19 @@ final class Kernel implements Runnable {
     public Kernel(File nukkitDirectory, File pluginDirectory) {
         RuntimeData.nukkitDirectory = nukkitDirectory;
         RuntimeData.pluginDirectory = pluginDirectory;
-        RuntimeData.currentDirectory = new File(pluginDirectory.getPath().replaceAll("\\\\", "/") + (pluginDirectory.getPath().replaceAll("\\\\", "/").endsWith("/") ? "" : "/") + "CPhone/");
+        RuntimeData.currentDirectory = new File(pluginDirectory.getPath()+ "/CPhone/");
 
         RuntimeData.currentDirectory.mkdirs();
+        new File(RuntimeData.currentDirectory + "/app/").mkdirs();
 
-        prepareConfig(RuntimeData.currentDirectory + "configuration.properties");
+        prepareConfig(RuntimeData.currentDirectory + "/configuration.properties");
 
         StringsData.strings = StringLoader.loadString(this.getClass().getClassLoader().getResourceAsStream("strings-ja.xml"));
         SharingData.triggerItemId = RuntimeData.config.getInt("TriggerItemId");
         SharingData.phones = new HashMap<>();
         SharingData.activities = new HashMap<>();
 
+        ApplicationData.applications = ApplicationLoader.loadAll(RuntimeData.currentDirectory + "/app/");
         ApplicationSQLManager.init();
     }
 
@@ -36,7 +38,6 @@ final class Kernel implements Runnable {
         if (!started) {
             started = true;
             SharingData.server.getScheduler().scheduleRepeatingTask(SharingData.pluginInstance, this::run, 1);
-            ApplicationData.applications = ApplicationLoader.loadAll(RuntimeData.currentDirectory + "app/");
         }
     }
 
@@ -53,6 +54,7 @@ final class Kernel implements Runnable {
         conf.set("SQLEngine", "sqlite");
         conf.set("ApplicationSQL", "${currentDir}/Applications.db");
         conf.set("TriggerItemId", 370);
+        conf.set("HomeText", "おしらせはありません。");
         conf.save();
 
         RuntimeData.config = conf;

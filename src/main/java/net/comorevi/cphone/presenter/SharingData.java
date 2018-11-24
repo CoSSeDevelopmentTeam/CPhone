@@ -19,4 +19,6 @@ public class SharingData {
 
     public static Map<Integer, ActivityBase> activities;
 
+    public static String homeText;
+
 }

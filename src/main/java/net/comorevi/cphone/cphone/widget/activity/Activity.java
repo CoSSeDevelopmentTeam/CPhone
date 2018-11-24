@@ -4,6 +4,8 @@ import cn.nukkit.Player;
 import net.comorevi.cphone.cphone.model.Bundle;
 import net.comorevi.cphone.cphone.model.Response;
 
+import java.util.Map;
+
 public interface Activity {
 
     void onCreate(Bundle bundle);
@@ -18,6 +20,6 @@ public interface Activity {
 
     void onRestart();
 
-    void start(Player player);
+    void start(Player player, Map<String, String> strings);
 
 }

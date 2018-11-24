@@ -9,9 +9,11 @@ import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.network.protocol.ModalFormResponsePacket;
 import net.comorevi.cphone.cphone.CPhone;
+import net.comorevi.cphone.cphone.application.ApplicationPermission;
 import net.comorevi.cphone.cphone.model.CustomResponse;
 import net.comorevi.cphone.cphone.model.ListResponse;
 import net.comorevi.cphone.cphone.model.ModalResponse;
+import net.comorevi.cphone.cphone.sql.ApplicationSQLManager;
 import net.comorevi.cphone.cphone.widget.activity.Activity;
 import net.comorevi.cphone.cphone.widget.activity.ActivityBase;
 import net.comorevi.cphone.cphone.widget.activity.base.CustomActivity;
@@ -115,7 +117,11 @@ class EventListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        if (SharingData.phones.containsKey(player.getName())) {
+        if (!ApplicationSQLManager.getUserNames().contains(player.getName())) {
+            ApplicationSQLManager.addUser(player.getName(), ApplicationPermission.ATTRIBUTE_DEFAULT);
+        }
+
+        if (!SharingData.phones.containsKey(player.getName())) {
             SharingData.phones.put(player.getName(), new CPhone(player));
         }
     }
@@ -130,11 +136,10 @@ class EventListener implements Listener {
         Player player = event.getPlayer();
 
         if (player.getInventory().getItemInHand().getId() == SharingData.triggerItemId) {
-            /*
-            if (!DataServer.isPhoneOpening(player)) {
-                DataServer.getPhone(player).show(player);
-                DataServer.setPhoneOpening(player, true);
-            }*/
+            if (!SharingData.phones.get(player.getName()).isOpening()) {
+                SharingData.phones.get(player.getName()).home();
+                SharingData.phones.get(player.getName()).setOpening(true);
+            }
         }
     }
 

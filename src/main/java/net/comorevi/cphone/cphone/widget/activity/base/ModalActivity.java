@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
 import net.comorevi.cphone.cphone.widget.activity.ActivityBase;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -15,7 +16,6 @@ public abstract class ModalActivity extends ActivityBase {
     private String button1Text;
     private String button2Text;
 
-    private Map<String, Object> data;
     private Gson gson;
     private String json;
 
@@ -63,7 +63,7 @@ public abstract class ModalActivity extends ActivityBase {
     }
 
     private void encode() {
-        data.clear();
+        Map<String, Object> data = new HashMap<>();
 
         data.put("type", "modal");
         data.put("title", this.title);

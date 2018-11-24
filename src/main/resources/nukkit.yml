@@ -5,3 +5,9 @@ load: POSTWORLD
 author: popkechupki
 api: ["1.0.0"]
 description: "The next step for CPhone"
+
+commands:
+  setHomeMessage:
+    usage: "/setHomeMessage [message]"
+    description: "しふぉんのデフォルトのお知らせを設定。"
+    default: op

@@ -2,6 +2,7 @@ package net.comorevi.cphone.cphone;
 
 import cn.nukkit.Player;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
+import net.comorevi.cphone.cphone.data.RuntimeData;
 import net.comorevi.cphone.cphone.data.StringsData;
 import net.comorevi.cphone.cphone.model.Bundle;
 import net.comorevi.cphone.cphone.model.ListResponse;
@@ -14,16 +15,16 @@ import static net.comorevi.cphone.cphone.data.StringsData.strings;
 
 public class HomeActivity extends ListActivity {
 
-    private Player player;
+    private CPhone cPhone;
 
-    public HomeActivity(ApplicationManifest manifest, Player player) {
+    public HomeActivity(ApplicationManifest manifest) {
         super(manifest);
-        this.player = player;
     }
 
     @Override
     public void onCreate(Bundle bundle) {
         this.setTitle(strings.get("cphone_title"));
+        this.cPhone = bundle.getCPhone();
         init();
     }
 
@@ -33,13 +34,23 @@ public class HomeActivity extends ListActivity {
         switch (listResponse.getButtonIndex()) {
             case -1:
             case 0:
+                cPhone.setOpening(false);
+
+                String homeText = RuntimeData.config.getString("HomeText");
+                cPhone.setHomeMessage(homeText == null ? StringsData.strings.get("message_home_nonotification") : homeText);
                 ((ListResponse) response).getPlayer().sendMessage(StringsData.strings.get("message_home_closed"));
+
                 break;
 
             case 1:
+                cPhone.back();
                 break;
+
             case 2:
+                ApplicationListActivity applicationListActivity = new ApplicationListActivity(getManifest());
+                applicationListActivity.start(cPhone.getPlayer(), null);
                 break;
+                
             case 3:
                 break;
         }
@@ -71,13 +82,14 @@ public class HomeActivity extends ListActivity {
         };
         this.addButton(appsButton);
 
+        /*
         Button settingButton = new Button(strings.get("home_settings")) {
             @Override
             public void onClick(Player player) {
 
             }
         };
-        this.addButton(settingButton);
+        this.addButton(settingButton);*/
     }
 
 }

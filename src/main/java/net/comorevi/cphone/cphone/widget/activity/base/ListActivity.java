@@ -15,7 +15,6 @@ public abstract class ListActivity extends ActivityBase {
     private String content;
     private List<Button> buttons;
 
-    private Map<String, Object> data;
     private Gson gson;
     private String json;
 
@@ -27,6 +26,7 @@ public abstract class ListActivity extends ActivityBase {
         buttons = new ArrayList<>();
         gson = new Gson();
         json = "";
+        content = "";
     }
 
     public void setTitle(String title) {
@@ -56,11 +56,11 @@ public abstract class ListActivity extends ActivityBase {
     }
 
     private void encode() {
-        data.clear();
+        Map<String, Object> data = new HashMap<>();
 
         data.put("type", "form");
         data.put("title", this.title);
-        data.put("content", this.content);
+        data.put("content", this.content == null ? "" : this.content);
 
         List<Map<String, Object>> list = new ArrayList<>();
         for(Button button : buttons) {

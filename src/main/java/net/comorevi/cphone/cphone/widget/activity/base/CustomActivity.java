@@ -5,10 +5,7 @@ import net.comorevi.cphone.cphone.application.ApplicationManifest;
 import net.comorevi.cphone.cphone.widget.activity.ActivityBase;
 import net.comorevi.cphone.cphone.widget.element.Element;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public abstract class CustomActivity extends ActivityBase {
 
@@ -16,7 +13,6 @@ public abstract class CustomActivity extends ActivityBase {
     private String title;
     private List<Element> elements;
 
-    private Map<String, Object> data;
     private Gson gson;
     private String json;
 
@@ -48,7 +44,7 @@ public abstract class CustomActivity extends ActivityBase {
     }
 
     private void encode() {
-        data.clear();
+        Map<String, Object> data = new HashMap<>();
 
         data.put("type", "custom_form");
         data.put("title", this.title);

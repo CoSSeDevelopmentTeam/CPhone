@@ -30,7 +30,7 @@ class ApplicationLoader {
                 ApplicationManifest manifest = ManifestLoader.loadManifest(jar.getInputStream(jar.getJarEntry("ApplicationManifest.xml")));
 
                 if (manifest.toString().contains("null")) {
-                    SharingData.server.getLogger().alert(manifest.getTitle() + "has illegal Manifest.");
+                    SharingData.server.getLogger().alert(manifest.getTitle() + " has illegal Manifest.");
                     continue;
                 }
 
@@ -44,6 +44,8 @@ class ApplicationLoader {
                         .asSubclass(ApplicationBase.class);
 
                 applications.put(manifest.getTitle(), manifest);
+
+                SharingData.server.getLogger().info("Loaded: " + manifest.getTitle());
 
             } catch (ClassNotFoundException e) {
                 SharingData.server.getLogger().alert(file.getName().replaceAll(".jar", "") + " main class is not found.");
