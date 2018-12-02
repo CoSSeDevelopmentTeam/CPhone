@@ -27,7 +27,7 @@ public final class CPhone {
 
         Calendar cTime = Calendar.getInstance();
         int year = cTime.get(Calendar.YEAR);
-        int month = cTime.get(Calendar.MONTH);
+        int month = cTime.get(Calendar.MONTH) + 1;
         int date = cTime.get(Calendar.DATE);
         int hour = cTime.get(Calendar.HOUR_OF_DAY);
         int minute = cTime.get(Calendar.MINUTE);
