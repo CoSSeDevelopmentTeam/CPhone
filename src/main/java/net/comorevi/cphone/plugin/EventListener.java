@@ -16,7 +16,6 @@ import net.comorevi.cphone.cphone.model.CustomResponse;
 import net.comorevi.cphone.cphone.model.ListResponse;
 import net.comorevi.cphone.cphone.model.ModalResponse;
 import net.comorevi.cphone.cphone.sql.ApplicationSQLManager;
-import net.comorevi.cphone.cphone.widget.activity.Activity;
 import net.comorevi.cphone.cphone.widget.activity.ActivityBase;
 import net.comorevi.cphone.cphone.widget.activity.base.CustomActivity;
 import net.comorevi.cphone.cphone.widget.activity.base.ListActivity;
@@ -61,7 +60,6 @@ class EventListener implements Listener {
                     }
 
                 } else if (activity instanceof ModalActivity) {
-                    ModalActivity modalForm = (ModalActivity) activity;
                     String result = packet.data;
 
                     if (result.contains("true")) {
@@ -84,7 +82,7 @@ class EventListener implements Listener {
                                     Dropdown dropdown = (Dropdown) element;
                                     result.add(dropdown.getOptions().get(Integer.parseInt(String.valueOf(list.get(count)))));
                                 } else {
-                                    result.add((String) list.get(count));
+                                    result.add(list.get(count));
                                 }
                                 break;
 
