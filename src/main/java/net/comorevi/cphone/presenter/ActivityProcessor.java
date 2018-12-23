@@ -18,7 +18,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Map;
 
 public class ActivityProcessor {
 
@@ -60,8 +59,7 @@ public class ActivityProcessor {
                     break;
             }
 
-            if (stream == null) activityBase.start(player, null);
-            else activityBase.start(player, StringLoader.loadString(stream));
+            activityBase.start(player, stream != null ? StringLoader.loadString(stream) : null);
 
         } catch (MalformedURLException | ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException ex) {
             ex.printStackTrace();

@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
 import net.comorevi.cphone.cphone.widget.activity.ActivityBase;
 import net.comorevi.cphone.cphone.widget.element.Button;
-import net.comorevi.cphone.cphone.widget.element.Element;
 
 import java.util.*;
 

@@ -46,6 +46,11 @@ final class Kernel implements Runnable {
         RuntimeData.freeMemory = Runtime.getRuntime().freeMemory();
         RuntimeData.totalMemory = Runtime.getRuntime().totalMemory();
         RuntimeData.usingMemory = RuntimeData.totalMemory - RuntimeData.freeMemory;
+
+        double usedMemory = (double) RuntimeData.usingMemory;
+        if (usedMemory * 100 / (double) RuntimeData.maxMemory > 80) {
+            SharingData.phones.values().forEach(phone -> phone.setActivity(null));
+        }
     }
 
     private void prepareConfig(String path) {

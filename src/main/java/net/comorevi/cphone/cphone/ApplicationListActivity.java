@@ -16,16 +16,6 @@ import net.comorevi.cphone.cphone.widget.activity.ReturnType;
 import net.comorevi.cphone.cphone.widget.activity.base.ListActivity;
 import net.comorevi.cphone.cphone.widget.element.Button;
 import net.comorevi.cphone.presenter.ActivityProcessor;
-import net.comorevi.cphone.presenter.SharingData;
-
-import java.io.File;
-import java.io.InputStream;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.Map;
 
 import static net.comorevi.cphone.cphone.data.StringsData.strings;
 
