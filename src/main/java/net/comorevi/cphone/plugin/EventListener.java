@@ -8,6 +8,8 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.network.protocol.ModalFormResponsePacket;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import net.comorevi.cphone.cphone.CPhone;
 import net.comorevi.cphone.cphone.application.ApplicationPermission;
 import net.comorevi.cphone.cphone.model.CustomResponse;
@@ -70,7 +72,7 @@ class EventListener implements Listener {
 
                 } else if (activity instanceof CustomActivity) {
                     CustomActivity customForm = (CustomActivity) activity;
-                    String[] temp = packet.data.substring(1, packet.data.length() - 1).split(",");
+                    List<Object> list = new Gson().fromJson(packet.data, new TypeToken<List>(){}.getType());
 
                     List<Object> result = new ArrayList<>();
                     int count = 0;
@@ -80,22 +82,22 @@ class EventListener implements Listener {
                             case "string":
                                 if (element instanceof Dropdown) {
                                     Dropdown dropdown = (Dropdown) element;
-                                    result.add(dropdown.getOptions().get(Integer.parseInt(temp[count])));
+                                    result.add(dropdown.getOptions().get(Integer.parseInt(String.valueOf(list.get(count)))));
                                 } else {
-                                    result.add(temp[count]);
+                                    result.add((String) list.get(count));
                                 }
                                 break;
 
                             case "int":
-                                result.add(Integer.parseInt(temp[count]));
+                                result.add(Integer.parseInt(String.valueOf(list.get(count))));
                                 break;
 
                             case "float":
-                                result.add(Float.parseFloat(temp[count]));
+                                result.add(Float.parseFloat(String.valueOf(list.get(count))));
                                 break;
 
                             case "boolean":
-                                result.add(Boolean.parseBoolean(temp[count]));
+                                result.add(Boolean.parseBoolean(String.valueOf(list.get(count))));
                                 break;
 
                             case "null":
