@@ -78,12 +78,7 @@ class EventListener implements Listener {
                     for (Element element : customForm.getElements()) {
                         switch (element.getType()) {
                             case "string":
-                                if (element instanceof Dropdown) {
-                                    Dropdown dropdown = (Dropdown) element;
-                                    result.add(dropdown.getOptions().get(Integer.parseInt(String.valueOf(list.get(count)))));
-                                } else {
-                                    result.add(list.get(count));
-                                }
+                                result.add(String.valueOf(list.get(count)));
                                 break;
 
                             case "int":
@@ -91,7 +86,12 @@ class EventListener implements Listener {
                                 break;
 
                             case "float":
-                                result.add(Float.parseFloat(String.valueOf(list.get(count))));
+                                if (element instanceof Dropdown) {
+                                    Dropdown dropdown = (Dropdown) element;
+                                    result.add(dropdown.getOptions().get(Math.round(Float.parseFloat(String.valueOf(list.get(count))))));
+                                } else {
+                                    result.add(Float.parseFloat(String.valueOf(list.get(count))));
+                                }
                                 break;
 
                             case "boolean":

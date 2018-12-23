@@ -10,7 +10,7 @@ import java.util.Map;
 public class Dropdown implements Element {
 
     private String text;
-    private List<String> options = new ArrayList<String>();
+    private List<String> options = new ArrayList<>();
     private int defaultOptionIndex = 0;
 
     private Gson gson;
@@ -20,7 +20,7 @@ public class Dropdown implements Element {
     }
 
     public Dropdown(String text) {
-        this("", new ArrayList<String>());
+        this("", new ArrayList<>());
     }
 
     public Dropdown(String text, List<String> options){
@@ -97,7 +97,7 @@ public class Dropdown implements Element {
 
     @Override
     public String getType() {
-        return "int";
+        return "float";
     }
 
 }
