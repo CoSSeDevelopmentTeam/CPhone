@@ -75,8 +75,8 @@ class EventListener implements Listener {
                     List<Object> result = new ArrayList<>();
                     int count = 0;
 
-                    for (Element element : customForm.getElements()) {
-                        try {
+                    if (customForm.getElements().size() == list.size()) {
+                        for (Element element : customForm.getElements()) {
                             switch (element.getType()) {
                                 case "string":
                                     result.add(String.valueOf(list.get(count)));
@@ -103,11 +103,8 @@ class EventListener implements Listener {
                                     result.add("null");
                                     break;
                             }
-                        } catch (NullPointerException e) {
-                            result.clear();
-                            break;
+                            count++;
                         }
-                        count++;
                     }
 
                     ActivityProcessor.stop(player, activity, new CustomResponse(player, result));
