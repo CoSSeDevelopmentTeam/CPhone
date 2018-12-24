@@ -76,31 +76,36 @@ class EventListener implements Listener {
                     int count = 0;
 
                     for (Element element : customForm.getElements()) {
-                        switch (element.getType()) {
-                            case "string":
-                                result.add(String.valueOf(list.get(count)));
-                                break;
+                        try {
+                            switch (element.getType()) {
+                                case "string":
+                                    result.add(String.valueOf(list.get(count)));
+                                    break;
 
-                            case "int":
-                                result.add(Integer.parseInt(String.valueOf(list.get(count))));
-                                break;
+                                case "int":
+                                    result.add(Integer.parseInt(String.valueOf(list.get(count))));
+                                    break;
 
-                            case "float":
-                                if (element instanceof Dropdown) {
-                                    Dropdown dropdown = (Dropdown) element;
-                                    result.add(dropdown.getOptions().get(Math.round(Float.parseFloat(String.valueOf(list.get(count))))));
-                                } else {
-                                    result.add(Float.parseFloat(String.valueOf(list.get(count))));
-                                }
-                                break;
+                                case "float":
+                                    if (element instanceof Dropdown) {
+                                        Dropdown dropdown = (Dropdown) element;
+                                        result.add(dropdown.getOptions().get(Math.round(Float.parseFloat(String.valueOf(list.get(count))))));
+                                    } else {
+                                        result.add(Float.parseFloat(String.valueOf(list.get(count))));
+                                    }
+                                    break;
 
-                            case "boolean":
-                                result.add(Boolean.parseBoolean(String.valueOf(list.get(count))));
-                                break;
+                                case "boolean":
+                                    result.add(Boolean.parseBoolean(String.valueOf(list.get(count))));
+                                    break;
 
-                            case "null":
-                                result.add("null");
-                                break;
+                                case "null":
+                                    result.add("null");
+                                    break;
+                            }
+                        } catch (NullPointerException e) {
+                            result.clear();
+                            break;
                         }
                         count++;
                     }
