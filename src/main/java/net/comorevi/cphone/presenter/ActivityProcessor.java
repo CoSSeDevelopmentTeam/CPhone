@@ -6,6 +6,7 @@ import net.comorevi.cphone.cphone.application.ApplicationManifest;
 import net.comorevi.cphone.cphone.data.ApplicationData;
 import net.comorevi.cphone.cphone.data.RuntimeData;
 import net.comorevi.cphone.cphone.data.StringsData;
+import net.comorevi.cphone.cphone.model.CustomResponse;
 import net.comorevi.cphone.cphone.model.Response;
 import net.comorevi.cphone.cphone.utils.StringLoader;
 import net.comorevi.cphone.cphone.widget.activity.Activity;
@@ -69,8 +70,15 @@ public class ActivityProcessor {
     }
 
     public static void stop(Player player, ActivityBase activity, Response response) {
+        if (response instanceof CustomResponse && ((CustomResponse) response).getResult().size() == 0) {
+            SharingData.phones.get(player.getName()).setActivity(activity);
+            return;
+        }
+
         switch (activity.onStop(response)) {
             case TYPE_END:
+                activity.onDestroy();
+                SharingData.activities.remove(activity.getId());
                 SharingData.phones.get(player.getName()).home();
                 break;
 
