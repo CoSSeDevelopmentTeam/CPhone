@@ -71,7 +71,9 @@ public class ActivityProcessor {
 
     public static void stop(Player player, ActivityBase activity, Response response) {
         if (response instanceof CustomResponse && ((CustomResponse) response).getResult().size() == 0) {
+            activity.onPause();
             SharingData.phones.get(player.getName()).setActivity(activity);
+            SharingData.phones.get(player.getName()).home();
             return;
         }
 

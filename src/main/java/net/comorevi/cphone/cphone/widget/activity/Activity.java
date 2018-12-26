@@ -22,4 +22,6 @@ public interface Activity {
 
     void start(Player player, Map<String, String> strings);
 
+    Map<String, String> getStrings();
+
 }

@@ -46,11 +46,12 @@ public final class CPhone {
             setHomeMessage(StringsData.strings.get("message_home_noback"));
             home();
             return false;
-        }
 
-        activity.onRestart();
-        activity.onStart();
-        return true;
+        } else {
+            activity.onRestart();
+            activity.start(player, activity.getStrings());
+            return true;
+        }
     }
 
     public boolean isOpening() {

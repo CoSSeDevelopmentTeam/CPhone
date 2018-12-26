@@ -15,6 +15,9 @@ import java.util.Map;
 
 public abstract class ActivityBase extends ApplicationBase implements Activity, Buildable, Serializable {
 
+    private Map<String, String> strings;
+    private boolean created = false;
+
     public ActivityBase(ApplicationManifest manifest) {
         super(manifest);
     }
@@ -43,8 +46,19 @@ public abstract class ActivityBase extends ApplicationBase implements Activity, 
 
     }
 
+    @Override
+    public final Map<String, String> getStrings() {
+        return strings;
+    }
+
     public void start(Player player, Map<String, String> strings) {
-        this.onCreate(new Bundle(SharingData.phones.get(player.getName()), System.currentTimeMillis(), RuntimeData.currentDirectory, strings));
+        this.strings = strings;
+        
+        if (!created) {
+            this.onCreate(new Bundle(SharingData.phones.get(player.getName()), System.currentTimeMillis(), RuntimeData.currentDirectory, strings));
+            created = true;
+        }
+
         send(player);
         this.onStart();
     }

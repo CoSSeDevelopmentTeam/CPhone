@@ -75,7 +75,7 @@ class EventListener implements Listener {
                     List<Object> result = new ArrayList<>();
                     int count = 0;
 
-                    if (customForm.getElements().size() == list.size()) {
+                    if (list != null && customForm.getElements().size() == list.size()) {
                         for (Element element : customForm.getElements()) {
                             switch (element.getType()) {
                                 case "string":
