@@ -49,7 +49,10 @@ final class Kernel implements Runnable {
 
         double usedMemory = (double) RuntimeData.usingMemory;
         if (usedMemory * 100 / (double) RuntimeData.maxMemory > 80) {
-            SharingData.phones.values().forEach(phone -> phone.setActivity(null));
+            SharingData.phones.values().forEach(phone -> {
+                phone.setActivity(null);
+                phone.setHomeMessage(StringsData.strings.get("message_home_suspendappreset"));
+            });
         }
     }
 

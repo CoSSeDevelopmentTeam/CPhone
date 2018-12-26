@@ -8,7 +8,8 @@
 
     <string name="message_home_nonotification">There is no notification.</string>
     <string name="message_home_noback">§bThere is no application actually being done.</string>
+    <string name="message_home_suspendappreset">The app you suspended is cleared to save memory.</string>
     <string name="message_home_closed">§7システム>>§a§oClosed CoSSePhone.</string>]
     <string name="message_application_error_start">§eAn error occurred while executing the application.: </string>
-    <string name="message_application_info">アプリ一覧 </string>
+    <string name="message_application_info">Apps</string>
 </strings>
