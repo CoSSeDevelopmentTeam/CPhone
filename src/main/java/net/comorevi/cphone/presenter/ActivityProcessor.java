@@ -17,14 +17,12 @@ import net.comorevi.cphone.cphone.widget.activity.ReturnType;
 import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
 public class ActivityProcessor {
 
-    public static Activity send(Player player, ActivityBase activity) {
+    public static void send(Player player, ActivityBase activity) {
         SharingData.activities.put(activity.getId(), activity);
 
         ModalFormRequestPacket packet = new ModalFormRequestPacket();
@@ -32,8 +30,6 @@ public class ActivityProcessor {
         packet.formId = activity.getId();
 
         player.dataPacket(packet);
-
-        return activity;
     }
 
     public static void startActivity(Player player, String appName) {
@@ -81,16 +77,17 @@ public class ActivityProcessor {
 
         ReturnType type = activity.onStop(response);
         if (type == null) type = ReturnType.TYPE_END;
-        
+
+        activity.onDestroy();
+
         switch (type) {
             case TYPE_END:
-                activity.onDestroy();
                 SharingData.activities.remove(activity.getId());
                 SharingData.phones.get(player.getName()).home();
                 break;
 
+            case TYPE_IGNORE:
             case TYPE_CONTINUE:
-                activity.onDestroy();
                 SharingData.activities.remove(activity.getId());
                 break;
         }

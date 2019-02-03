@@ -14,6 +14,7 @@ public class ApplicationManifest implements Serializable {
     private String initialize;
     private ApplicationPermission permission;
     private int price;
+    private boolean isVisible = true;
 
     public ApplicationManifest() {
 
@@ -75,6 +76,14 @@ public class ApplicationManifest implements Serializable {
         this.icon = icon;
     }
 
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
+    }
+
     public String getInitialize() {
         return initialize;
     }
@@ -112,6 +121,7 @@ public class ApplicationManifest implements Serializable {
                 ", initialize='" + initialize + '\'' +
                 ", permission='" + permission.getName() + '\'' +
                 ", price=" + price +
+                ", isVisible='" + isVisible +
                 '}';
     }
 }

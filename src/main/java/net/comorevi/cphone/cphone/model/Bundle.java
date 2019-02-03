@@ -13,7 +13,7 @@ public final class Bundle implements Serializable {
     private final long time;
     private final File currentDir;
     private final Map<String, String> strings;
-    private final Map<String, Object> data;
+    private Map<String, Object> data;
 
     public Bundle(CPhone cphone, long time, File currentDir, Map<String, String> strings) {
         this.cphone = cphone;
@@ -45,7 +45,7 @@ public final class Bundle implements Serializable {
     }
 
     public void put(String key, Object data) {
-        if (data == null) data = new HashMap<>();
+        if (this.data == null) this.data = new HashMap<>();
         this.data.put(key, data);
     }
 

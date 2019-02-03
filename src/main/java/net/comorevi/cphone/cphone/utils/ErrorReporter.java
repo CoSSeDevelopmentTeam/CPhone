@@ -15,13 +15,14 @@ public class ErrorReporter {
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy_MM_dd_HHmmss");
             Date date = new Date();
-            File file = new File(SharingData.pluginInstance.getDataFolder() + "error/" + title + "_" + format.format(date) + ".txt");
-            file.createNewFile();
+            File file = new File(SharingData.server.getPluginPath() + "/CPhone/error/" + title + "_" + format.format(date) + ".txt");
 
             PrintWriter pw = new PrintWriter(new FileOutputStream(file));
             pw.println("Reported by:" + player);
             pw.println("Date:" + format.format(date));
-            ex.printStackTrace(new PrintWriter(new FileOutputStream(file)));
+            ex.printStackTrace(pw);
+            pw.flush();
+            pw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

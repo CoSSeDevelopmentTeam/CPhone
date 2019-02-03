@@ -59,6 +59,10 @@ public class ManifestLoader {
                             case "price":
                                 manifest.setPrice(Integer.parseInt(text));
                                 break;
+
+                            case "visible":
+                                manifest.setVisible(Boolean.parseBoolean(text));
+                                break;
                         }
                     }
                 }
