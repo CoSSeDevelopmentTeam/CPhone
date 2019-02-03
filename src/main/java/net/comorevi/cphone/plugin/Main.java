@@ -3,10 +3,8 @@ package net.comorevi.cphone.plugin;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.plugin.PluginBase;
-import net.comorevi.cphone.cphone.core.KernelManager;
+import net.comorevi.cphone.presenter.CPhoneManager;
 import net.comorevi.cphone.presenter.SharingData;
-
-import java.io.File;
 
 public class Main extends PluginBase {
 
@@ -18,12 +16,13 @@ public class Main extends PluginBase {
         SharingData.pluginInstance = this;
         SharingData.server = getServer();
 
-        KernelManager.startKernel(new File("./"), new File(getServer().getPluginPath()));
+        CPhoneManager.startKernel();
+        CPhoneManager.addListener();
     }
 
     @Override
     public void onDisable() {
-
+        CPhoneManager.shutdownKernel();
     }
 
     @Override

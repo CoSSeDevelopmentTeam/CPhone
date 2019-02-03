@@ -10,7 +10,7 @@ import java.util.*;
 public abstract class CustomActivity extends ActivityBase {
 
     private int id;
-    private String title;
+    private String title = "CPhone";
     private List<Element> elements;
 
     private Gson gson;

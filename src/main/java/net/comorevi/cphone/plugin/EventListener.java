@@ -32,10 +32,6 @@ import static net.comorevi.cphone.presenter.SharingData.activities;
 
 class EventListener implements Listener {
 
-    public EventListener() {
-
-    }
-
     @EventHandler
     public void onDataPacket(DataPacketReceiveEvent event) {
         if (event.getPacket() instanceof ModalFormResponsePacket) {
@@ -136,7 +132,6 @@ class EventListener implements Listener {
     @EventHandler
     public void onTap(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-
         if (player.getInventory().getItemInHand().getId() == SharingData.triggerItemId) {
             if (!SharingData.phones.get(player.getName()).isOpening()) {
                 SharingData.phones.get(player.getName()).home();

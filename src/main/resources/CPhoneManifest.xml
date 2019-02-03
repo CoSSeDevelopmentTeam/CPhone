@@ -10,6 +10,7 @@
         <mcbeversion>1.6.1</mcbeversion>
         <icon>null</icon>
         <price>10</price>
+        <initialize>net.comorevi.Initializer</initialize>
     </application>
 
     <permission type = "default" />

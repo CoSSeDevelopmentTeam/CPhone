@@ -81,15 +81,6 @@ public class HomeActivity extends ListActivity {
             }
         };
         this.addButton(appsButton);
-
-        /*
-        Button settingButton = new Button(strings.get("home_settings")) {
-            @Override
-            public void onClick(Player player) {
-
-            }
-        };
-        this.addButton(settingButton);*/
     }
 
 }

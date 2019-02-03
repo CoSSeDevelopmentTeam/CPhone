@@ -11,10 +11,10 @@ import java.util.Random;
 public abstract class ModalActivity extends ActivityBase {
 
     private int id;
-    private String title;
+    private String title = "CPhone";
     private String content;
-    private String button1Text;
-    private String button2Text;
+    private String button1Text = "Yes";
+    private String button2Text = "No";
 
     private Gson gson;
     private String json;

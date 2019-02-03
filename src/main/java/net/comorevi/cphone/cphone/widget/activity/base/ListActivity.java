@@ -10,7 +10,7 @@ import java.util.*;
 public abstract class ListActivity extends ActivityBase {
 
     private int id;
-    private String title;
+    private String title = "CPhone";
     private String content;
     private List<Button> buttons;
 

@@ -52,6 +52,10 @@ public class ManifestLoader {
                                 manifest.setIcon(text);
                                 break;
 
+                            case "initialize":
+                                manifest.setInitialize(text);
+                                break;
+
                             case "price":
                                 manifest.setPrice(Integer.parseInt(text));
                                 break;

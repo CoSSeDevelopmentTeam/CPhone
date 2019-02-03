@@ -3,6 +3,7 @@ package net.comorevi.cphone.cphone.core;
 import net.comorevi.cphone.cphone.data.ApplicationData;
 import net.comorevi.cphone.cphone.data.RuntimeData;
 import net.comorevi.cphone.cphone.data.StringsData;
+import net.comorevi.cphone.cphone.service.AbstractService;
 import net.comorevi.cphone.cphone.sql.ApplicationSQLManager;
 import net.comorevi.cphone.cphone.utils.PropertiesConfig;
 import net.comorevi.cphone.cphone.utils.StringLoader;
@@ -10,18 +11,24 @@ import net.comorevi.cphone.presenter.SharingData;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 final class Kernel implements Runnable {
 
     private boolean started;
+    private final ExecutorService executor;
 
-    public Kernel(File nukkitDirectory, File pluginDirectory) {
+    Kernel(File nukkitDirectory, File pluginDirectory) {
+        this.executor = Executors.newCachedThreadPool();
+
         RuntimeData.nukkitDirectory = nukkitDirectory;
         RuntimeData.pluginDirectory = pluginDirectory;
         RuntimeData.currentDirectory = new File(pluginDirectory.getPath()+ "/CPhone/");
 
         RuntimeData.currentDirectory.mkdirs();
         new File(RuntimeData.currentDirectory + "/app/").mkdirs();
+        new File(RuntimeData.currentDirectory + "/error/").mkdirs();
 
         prepareConfig(RuntimeData.currentDirectory + "/configuration.properties");
 
@@ -34,11 +41,19 @@ final class Kernel implements Runnable {
         ApplicationSQLManager.init();
     }
 
-    public void start() {
+    final void start() {
         if (!started) {
             started = true;
             SharingData.server.getScheduler().scheduleRepeatingTask(SharingData.pluginInstance, this::run, 1);
         }
+    }
+
+    final void shutdown() {
+        executor.shutdown();
+    }
+
+    final void startService(AbstractService service) {
+        executor.submit(service);
     }
 
     private void tick() {
@@ -73,7 +88,7 @@ final class Kernel implements Runnable {
     }
 
     @Override
-    public void run() {
+    public final void run() {
         tick();
     }
 

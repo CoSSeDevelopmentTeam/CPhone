@@ -8,9 +8,11 @@ import net.comorevi.cphone.cphone.data.RuntimeData;
 import net.comorevi.cphone.cphone.data.StringsData;
 import net.comorevi.cphone.cphone.model.CustomResponse;
 import net.comorevi.cphone.cphone.model.Response;
+import net.comorevi.cphone.cphone.utils.ErrorReporter;
 import net.comorevi.cphone.cphone.utils.StringLoader;
 import net.comorevi.cphone.cphone.widget.activity.Activity;
 import net.comorevi.cphone.cphone.widget.activity.ActivityBase;
+import net.comorevi.cphone.cphone.widget.activity.ReturnType;
 
 import java.io.File;
 import java.io.InputStream;
@@ -62,10 +64,10 @@ public class ActivityProcessor {
 
             activityBase.start(player, stream != null ? StringLoader.loadString(stream) : null);
 
-        } catch (MalformedURLException | ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException ex) {
-            ex.printStackTrace();
+        } catch (Exception ex) {
+            ErrorReporter.reportError(player.getName(), manifest.getTitle(), ex);
             SharingData.phones.get(player.getName()).setHomeMessage(StringsData.strings.get("message_application_error_start") + manifest.getTitle());
-            SharingData.phones.get(player.getName()).back();
+            SharingData.phones.get(player.getName()).home();
         }
     }
 
@@ -77,7 +79,10 @@ public class ActivityProcessor {
             return;
         }
 
-        switch (activity.onStop(response)) {
+        ReturnType type = activity.onStop(response);
+        if (type == null) type = ReturnType.TYPE_END;
+        
+        switch (type) {
             case TYPE_END:
                 activity.onDestroy();
                 SharingData.activities.remove(activity.getId());

@@ -1,7 +1,6 @@
 package net.comorevi.cphone.cphone.widget.activity;
 
 import cn.nukkit.Player;
-import net.comorevi.cphone.cphone.CPhone;
 import net.comorevi.cphone.cphone.application.ApplicationBase;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
 import net.comorevi.cphone.cphone.data.RuntimeData;

@@ -1,10 +1,10 @@
 package net.comorevi.cphone.cphone.model;
 
-import cn.nukkit.Player;
 import net.comorevi.cphone.cphone.CPhone;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 public final class Bundle implements Serializable {
@@ -13,6 +13,7 @@ public final class Bundle implements Serializable {
     private final long time;
     private final File currentDir;
     private final Map<String, String> strings;
+    private final Map<String, Object> data;
 
     public Bundle(CPhone cphone, long time, File currentDir, Map<String, String> strings) {
         this.cphone = cphone;
@@ -20,6 +21,7 @@ public final class Bundle implements Serializable {
         this.currentDir = currentDir;
 
         this.strings = strings;
+        this.data = null;
     }
 
     public CPhone getCPhone() {
@@ -41,4 +43,14 @@ public final class Bundle implements Serializable {
     public Map<String, String> getStrings() {
         return strings;
     }
+
+    public void put(String key, Object data) {
+        if (data == null) data = new HashMap<>();
+        this.data.put(key, data);
+    }
+
+    public Map<String, Object> getData() {
+        return data;
+    }
+
 }

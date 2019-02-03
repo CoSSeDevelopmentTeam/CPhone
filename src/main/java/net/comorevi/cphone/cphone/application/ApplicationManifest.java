@@ -11,6 +11,7 @@ public class ApplicationManifest implements Serializable {
     private String description;
     private String author;
     private String icon;
+    private String initialize;
     private ApplicationPermission permission;
     private int price;
 
@@ -74,6 +75,14 @@ public class ApplicationManifest implements Serializable {
         this.icon = icon;
     }
 
+    public String getInitialize() {
+        return initialize;
+    }
+
+    public void setInitialize(String initialize) {
+        this.initialize = initialize;
+    }
+
     public int getPrice() {
         return price;
     }
@@ -100,6 +109,7 @@ public class ApplicationManifest implements Serializable {
                 ", description='" + description + '\'' +
                 ", author='" + author + '\'' +
                 ", icon='" + icon + '\'' +
+                ", initialize='" + initialize + '\'' +
                 ", permission='" + permission.getName() + '\'' +
                 ", price=" + price +
                 '}';
