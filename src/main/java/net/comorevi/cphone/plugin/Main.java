@@ -10,7 +10,6 @@ public class Main extends PluginBase {
 
     @Override
     public void onEnable() {
-        getLogger().info("Enabling...");
         getServer().getPluginManager().registerEvents(new EventListener(), this);
 
         SharingData.pluginInstance = this;
@@ -18,12 +17,16 @@ public class Main extends PluginBase {
 
         CPhoneManager.startKernel();
         CPhoneManager.addListener();
+
+        getLogger().info("Enabled.");
     }
+
 
     @Override
     public void onDisable() {
         CPhoneManager.shutdownKernel();
     }
+
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

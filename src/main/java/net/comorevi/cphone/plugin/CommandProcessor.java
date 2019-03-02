@@ -12,7 +12,7 @@ class CommandProcessor {
 
     protected static boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         switch (command.getName()) {
-            case "setHomeMessage": {
+            case "sethomemessage": {
                 if (sender instanceof Player) {
                     if (((Player) sender).isOp()) {
                         sender.sendMessage(TextFormat.RED + "opのみがこのコマンドを使えます。");
