@@ -7,6 +7,7 @@ import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.event.server.DataPacketReceiveEvent;
+import cn.nukkit.item.ItemGhastTear;
 import cn.nukkit.network.protocol.ModalFormResponsePacket;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -122,6 +123,8 @@ class EventListener implements Listener {
         if (!SharingData.phones.containsKey(player.getName())) {
             SharingData.phones.put(player.getName(), new CPhone(player));
         }
+
+        player.getInventory().setItem(0, new ItemGhastTear());
     }
 
     @EventHandler
