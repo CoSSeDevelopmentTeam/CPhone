@@ -58,12 +58,7 @@ class EventListener implements Listener {
 
                 } else if (activity instanceof ModalActivity) {
                     String result = packet.data;
-
-                    if (result.contains("true")) {
-                        ActivityProcessor.stop(player, activity, new ModalResponse(player, 1));
-                    } else {
-                        ActivityProcessor.stop(player, activity, new ModalResponse(player, 2));
-                    }
+                    ActivityProcessor.stop(player, activity, new ModalResponse(player, result.contains("true") ? 1 : 2));
 
                 } else if (activity instanceof CustomActivity) {
                     CustomActivity customForm = (CustomActivity) activity;

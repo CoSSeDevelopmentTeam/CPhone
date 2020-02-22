@@ -22,7 +22,6 @@ import static net.comorevi.cphone.cphone.data.StringsData.strings;
 public class ApplicationListActivity extends ListActivity {
 
     private CPhone cPhone;
-    private Player player;
 
     public ApplicationListActivity(ApplicationManifest manifest) {
         super(manifest);
