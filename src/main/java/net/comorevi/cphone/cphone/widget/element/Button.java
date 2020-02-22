@@ -33,7 +33,7 @@ public class Button {
 
         if (imageType.equals("path")) {
             if(!image.containsKey("type")) this.image.put("type", "path");
-            if(!image.containsKey("data")) this.image.put("data", this.getImageByteArray(new File(imageData)));
+            if(!image.containsKey("data")) this.image.put("data", imageData);
 
         } else if(imageType.equals("url")){
             if(!image.containsKey("type")) this.image.put("type", "url");
