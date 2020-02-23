@@ -4,7 +4,7 @@ version: 1.0.0
 author: itsu
 authors: ["comorevi"]
 api: ["1.0.0"]
-description: "The next step for CPhone"
+description: "The next step framework for CPhone"
 
 commands:
   sethomemessage:

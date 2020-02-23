@@ -50,6 +50,10 @@ public abstract class ActivityBase extends ApplicationBase implements Activity, 
         return strings;
     }
 
+    public void start(Bundle bundle) {
+        start(bundle.getCPhone().getPlayer(), bundle.getStrings());
+    }
+
     public void start(Player player, Map<String, String> strings) {
         this.strings = strings;
         
