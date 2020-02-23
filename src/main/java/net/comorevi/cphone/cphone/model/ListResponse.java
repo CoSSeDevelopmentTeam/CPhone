@@ -7,6 +7,8 @@ public class ListResponse implements Response {
     private final Player player;
     private final int buttonIndex;
 
+    public static final int NOT_SELECTED = -1;
+
     public ListResponse(Player player, int buttonIndex) {
         this.player = player;
         this.buttonIndex = buttonIndex;
