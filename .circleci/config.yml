@@ -1,27 +1,9 @@
-# Java Maven CircleCI 2.0 configuration file
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/openjdk:8-jdk-browsers
+version: 2.1
 
-    working_directory: ~/repo
+orbs:
+  maven: circleci/maven@0.0.12
 
-    environment:
-      # Customize the JVM maximum heap limit
-      MAVEN_OPTS: -Xmx2024m
-
-    steps:
-      - checkout
-      - restore_cache:
-          key: repo-{{ checksum "pom.xml" }}
-      - run: mvn dependency:go-offline
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: repo-{{ checksum "pom.xml" }}
-      - run: mvn package
-      - store_test_results:
-          path: target/surefire-reports
-      - store_artifacts:
-          path: target/CPhone-1.0-SNAPSHOT.jar
+workflows:
+  maven_test:
+    jobs:
+      - maven/test # checkout, build, test, and upload test results
