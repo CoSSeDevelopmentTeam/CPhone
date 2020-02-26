@@ -5,7 +5,7 @@
      working_directory: ~/repo
 
      docker:
-       - image: circleci/openjdk:8-jdk-browsers
+       - image: circleci/openjdk:10.0.2-jdk
 
      environment:
        # Customize the JVM maximum heap limit
