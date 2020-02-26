@@ -50,7 +50,7 @@ public class ApplicationListActivity extends ListActivity {
         ApplicationSQLManager.getApplications(cPhone.getPlayer().getName()).forEach(appName -> {
             ApplicationManifest manifest = ApplicationData.applications.get(appName);
             if (manifest.isVisible()) {
-                Button applicationButton = new Button(appName, "url", manifest.getIcon()) {
+                Button applicationButton = new Button(appName, manifest.getIconType() == null ? "url" : manifest.getIconType(), manifest.getIcon()) {
                     @Override
                     public void onClick(Player player) {
                         ActivityProcessor.startActivity(player, appName);

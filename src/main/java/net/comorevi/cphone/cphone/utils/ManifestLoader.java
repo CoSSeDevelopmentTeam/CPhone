@@ -52,6 +52,10 @@ public class ManifestLoader {
                                 manifest.setIcon(text);
                                 break;
 
+                            case "iconType":
+                                manifest.setIconType(text);
+                                break;
+
                             case "initialize":
                                 manifest.setInitialize(text);
                                 break;

@@ -12,7 +12,7 @@ public abstract class ModalActivity extends ActivityBase {
 
     private int id;
     private String title = "CPhone";
-    private String content;
+    private String content = "";
     private String button1Text = "Yes";
     private String button2Text = "No";
 

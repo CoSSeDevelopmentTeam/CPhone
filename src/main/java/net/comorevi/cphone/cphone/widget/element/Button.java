@@ -32,26 +32,26 @@ public class Button {
         this.text = text;
 
         if (imageType.equals("path")) {
-            if(!image.containsKey("type")) this.image.put("type", "path");
-            if(!image.containsKey("data")) this.image.put("data", imageData);
+            if (!image.containsKey("type")) this.image.put("type", "path");
+            if (!image.containsKey("data")) this.image.put("data", imageData);
 
-        } else if(imageType.equals("url")){
-            if(!image.containsKey("type")) this.image.put("type", "url");
-            if(!image.containsKey("data")) this.image.put("data", imageData);
+        } else if (imageType.equals("url")) {
+            if (!image.containsKey("type")) this.image.put("type", "url");
+            if (!image.containsKey("data")) this.image.put("data", imageData);
 
         } else {
-            throw new IllegalArgumentException("Not allowed image type: " + imageType + "\nYou have to specity url or path as image type.");
+            throw new IllegalArgumentException("Not allowed image type: " + imageType + "\nYou have to specify url or path as image type.");
         }
 
     }
 
-    public Button setImage(String imageType, String imageData){
+    public Button setImage(String imageType, String imageData) {
 
         if (imageType.equals("path")) {
             this.image.put("type", "path");
-            this.image.put("data", this.getImageByteArray(new File(imageData)));
+            this.image.put("data", imageData);
 
-        } else if(imageType.equals("url")){
+        } else if (imageType.equals("url")) {
             this.image.put("type", "url");
             this.image.put("data", imageData);
 
@@ -84,12 +84,12 @@ public class Button {
         return null;
     }
 
-    public Button setText(String text){
+    public Button setText(String text) {
         this.text = text;
         return this;
     }
 
-    public String getText(){
+    public String getText() {
         return this.text;
     }
 

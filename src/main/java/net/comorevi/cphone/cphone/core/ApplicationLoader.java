@@ -41,10 +41,6 @@ class ApplicationLoader {
                     continue;
                 }
 
-                Class<? extends ApplicationBase> mainClass = new URLClassLoader(new URL[]{file.toURI().toURL()}, SharingData.pluginInstance.getClass().getClassLoader())
-                        .loadClass(manifest.getMain())
-                        .asSubclass(ApplicationBase.class);
-
                 if (manifest.getInitialize() != null) {
                     Class<? extends Initializer> initializer = new URLClassLoader(new URL[] {file.toURI().toURL()}, SharingData.pluginInstance.getClass().getClassLoader())
                             .loadClass(manifest.getInitialize())
