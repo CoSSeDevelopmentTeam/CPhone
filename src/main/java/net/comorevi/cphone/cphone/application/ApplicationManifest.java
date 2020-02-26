@@ -11,6 +11,7 @@ public class ApplicationManifest implements Serializable {
     private String description;
     private String author;
     private String icon;
+    private String iconType;
     private String initialize;
     private ApplicationPermission permission;
     private int price;
@@ -74,6 +75,14 @@ public class ApplicationManifest implements Serializable {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getIconType() {
+        return iconType;
+    }
+
+    public void setIconType(String iconType) {
+        this.iconType = iconType;
     }
 
     public boolean isVisible() {
