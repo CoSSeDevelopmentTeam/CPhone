@@ -13,7 +13,7 @@
 
      steps:
        - checkout
-       - - restore_cache:
+       - restore_cache:
              key: repo-{{ checksum "pom.xml" }}
        - run: mvn dependency:go-offline
        - save_cache:
