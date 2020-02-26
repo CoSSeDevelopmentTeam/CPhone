@@ -70,7 +70,7 @@ public abstract class ActivityBase extends ApplicationBase implements Activity, 
         ActivityProcessor.send(player, this);
     }
 
-    @Deprecated (since = "1.0")
+    @Deprecated
     public String serialize() {
         return null;
     }
