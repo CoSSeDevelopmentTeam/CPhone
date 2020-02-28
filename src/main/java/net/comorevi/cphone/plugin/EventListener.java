@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import net.comorevi.cphone.cphone.CPhone;
 import net.comorevi.cphone.cphone.application.ApplicationPermission;
+import net.comorevi.cphone.cphone.data.RuntimeData;
 import net.comorevi.cphone.cphone.model.CustomResponse;
 import net.comorevi.cphone.cphone.model.ListResponse;
 import net.comorevi.cphone.cphone.model.ModalResponse;
@@ -112,7 +113,10 @@ class EventListener implements Listener {
         Player player = event.getPlayer();
 
         if (!ApplicationSQLManager.getUserNames().contains(player.getName())) {
-            ApplicationSQLManager.addUser(player.getName(), ApplicationPermission.ATTRIBUTE_DEFAULT);
+            ApplicationPermission permission = ApplicationPermission.ATTRIBUTE_EVERYONE;
+            if (player.isOp()) permission = ApplicationPermission.ATTRIBUTE_OPERATOR;
+            if (player.getName().equals(RuntimeData.config.getString("ServerOwner"))) permission = ApplicationPermission.ATTRIBUTE_OWNER;
+            ApplicationSQLManager.addUser(player.getName(), permission);
         }
 
         if (!SharingData.phones.containsKey(player.getName())) {

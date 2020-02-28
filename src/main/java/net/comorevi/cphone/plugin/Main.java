@@ -3,6 +3,7 @@ package net.comorevi.cphone.plugin;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.plugin.PluginBase;
+import cn.nukkit.utils.Config;
 import net.comorevi.cphone.presenter.CPhoneManager;
 import net.comorevi.cphone.presenter.SharingData;
 

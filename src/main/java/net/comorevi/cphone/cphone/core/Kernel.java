@@ -80,6 +80,7 @@ final class Kernel implements Runnable {
             conf.set("ApplicationSQL", "${currentDir}/Applications.db");
             conf.set("TriggerItemId", 370);
             conf.set("HomeText", "おしらせはありません。");
+            conf.set("ServerOwner", "ServerOwner_Name");
             conf.save();
         }
 

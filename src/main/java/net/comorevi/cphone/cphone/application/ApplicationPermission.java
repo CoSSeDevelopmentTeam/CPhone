@@ -1,23 +1,36 @@
 package net.comorevi.cphone.cphone.application;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum ApplicationPermission {
 
     ATTRIBUTE_DEFAULT("default"),
 
-    ATTRIBUTE_OPERATOR("operator"),
+    ATTRIBUTE_EVERYONE("everyone"),
 
-    ATTRIBUTE_OWNER("owner"),
+    ATTRIBUTE_OPERATOR("operator", ATTRIBUTE_EVERYONE),
 
-    ATTRIBUTE_EVERYONE("everyone");
+    ATTRIBUTE_OWNER("owner", ATTRIBUTE_EVERYONE, ATTRIBUTE_OPERATOR);
 
     private String name;
+    private List<ApplicationPermission> parents;
 
-    ApplicationPermission(String name) {
+    ApplicationPermission(String name, ApplicationPermission... parents) {
         this.name = name;
+        this.parents = Arrays.asList(parents);
     }
 
     public String getName() {
         return name;
+    }
+
+    public boolean contains(ApplicationPermission permission) {
+        return parents.contains(permission);
+    }
+
+    public boolean canAccept(ApplicationPermission permission) {
+        return (this == permission) || contains(permission);
     }
 
     public static ApplicationPermission fromName(String name) {

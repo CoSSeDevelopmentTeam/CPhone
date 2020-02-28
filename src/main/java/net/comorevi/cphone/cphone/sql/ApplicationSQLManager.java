@@ -126,7 +126,7 @@ public final class ApplicationSQLManager {
 
             if (applications.contains(manifest.getTitle())) return false;
 
-            if (getPermission(name) != manifest.getPermission()) {
+            if (manifest.getPermission() != ApplicationPermission.ATTRIBUTE_DEFAULT && !getPermission(name).canAccept(manifest.getPermission())) {
                 throw new PermissionException("Permission denied [" + name + "]: " + getPermission(name).getName() + ", Required: " + manifest.getPermission().getName());
             }
 
@@ -161,7 +161,7 @@ public final class ApplicationSQLManager {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setQueryTimeout(10);
 
-            stmt.setString(1, manifest.getTitle());
+            stmt.setString(1, new Gson().toJson(applications));
             stmt.setString(2, name);
 
             count = stmt.executeUpdate();
