@@ -87,6 +87,8 @@ public class ActivityProcessor {
                 break;
 
             case TYPE_IGNORE:
+                SharingData.phones.get(player.getName()).setOpening(false);
+
             case TYPE_CONTINUE:
                 SharingData.activities.remove(activity.getId());
                 break;
