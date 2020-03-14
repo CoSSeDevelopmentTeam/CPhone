@@ -48,6 +48,12 @@ public abstract class ListActivity extends ActivityBase {
         this.buttons.add(button);
     }
 
+    public void addButtons(Button[] buttons) {
+        for (Button button : buttons) {
+            addButton(button);
+        }
+    }
+
     @Override
     public String getJson() {
         encode();
