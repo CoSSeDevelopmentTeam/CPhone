@@ -33,6 +33,12 @@ public abstract class CustomActivity extends ActivityBase {
         this.elements.add(element);
     }
 
+    public void addFormElements(Element[] elements) {
+        for (Element element : elements) {
+            addFormElement(element);
+        }
+    }
+
     public List<Element> getElements() {
         return elements;
     }
