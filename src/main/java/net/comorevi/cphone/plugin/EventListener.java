@@ -7,8 +7,12 @@ import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.event.server.DataPacketReceiveEvent;
+import cn.nukkit.event.server.DataPacketSendEvent;
 import cn.nukkit.item.ItemGhastTear;
+import cn.nukkit.network.protocol.ModalFormRequestPacket;
 import cn.nukkit.network.protocol.ModalFormResponsePacket;
+import cn.nukkit.network.protocol.NetworkStackLatencyPacket;
+import cn.nukkit.scheduler.Task;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import net.comorevi.cphone.cphone.CPhone;
@@ -105,6 +109,31 @@ class EventListener implements Listener {
 
                 activities.remove(formId);
             }
+
+        } else if (event.getPacket() instanceof NetworkStackLatencyPacket) {
+            SharingData.server.getScheduler().scheduleDelayedTask(new Task() {
+                @Override
+                public void onRun(int i) {
+                    event.getPlayer().sendAttributes();
+                    System.out.println("SEND1");
+                }
+            }, 1);
+        }
+    }
+
+    @EventHandler
+    public void onSendPacket(DataPacketSendEvent event) {
+        if (event.getPacket() instanceof ModalFormRequestPacket) {
+            ModalFormRequestPacket pk = new ModalFormRequestPacket();
+            Player player = event.getPlayer();
+            SharingData.server.getScheduler().scheduleDelayedTask(new Task() {
+                @Override
+                public void onRun(int i) {
+                    if (player.isOnline()) {
+
+                    }
+                }
+            }, 1);
         }
     }
 

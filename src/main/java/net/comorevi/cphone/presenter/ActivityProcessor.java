@@ -2,6 +2,8 @@ package net.comorevi.cphone.presenter;
 
 import cn.nukkit.Player;
 import cn.nukkit.network.protocol.ModalFormRequestPacket;
+import cn.nukkit.network.protocol.UpdateAttributesPacket;
+import cn.nukkit.scheduler.Task;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
 import net.comorevi.cphone.cphone.data.ApplicationData;
 import net.comorevi.cphone.cphone.data.RuntimeData;
@@ -13,6 +15,7 @@ import net.comorevi.cphone.cphone.utils.StringLoader;
 import net.comorevi.cphone.cphone.widget.activity.Activity;
 import net.comorevi.cphone.cphone.widget.activity.ActivityBase;
 import net.comorevi.cphone.cphone.widget.activity.ReturnType;
+import net.comorevi.cphone.cphone.widget.activity.base.ListActivity;
 
 import java.io.File;
 import java.io.InputStream;
@@ -30,6 +33,17 @@ public class ActivityProcessor {
         packet.formId = activity.getId();
 
         player.dataPacket(packet);
+
+        if (activity instanceof ListActivity) {
+            SharingData.server.getScheduler().scheduleDelayedTask(new Task() {
+                @Override
+                public void onRun(int i) {
+                    if (player.isOnline()) {
+                        player.sendAttributes();
+                    }
+                }
+            }, 1);
+        }
     }
 
     public static void startActivity(Player player, String appName) {

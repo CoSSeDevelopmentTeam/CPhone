@@ -29,35 +29,20 @@ public class Button {
     }
 
     public Button(String text, String imageType, String imageData) {
-        this.text = text;
+        this.text = text == null ? "" : text;
 
-        if (imageType.equals("path")) {
-            if (!image.containsKey("type")) this.image.put("type", "path");
-            if (!image.containsKey("data")) this.image.put("data", imageData);
+        if (imageType == null || !imageType.equals("url") && !imageType.equals("path")) imageType = "url";
 
-        } else if (imageType.equals("url")) {
-            if (!image.containsKey("type")) this.image.put("type", "url");
-            if (!image.containsKey("data")) this.image.put("data", imageData);
-
-        } else {
-            throw new IllegalArgumentException("Not allowed image type: " + imageType + "\nYou have to specify url or path as image type.");
-        }
-
+        this.image.put("type", imageType);
+        this.image.put("data", imageData);
     }
 
     public Button setImage(String imageType, String imageData) {
 
-        if (imageType.equals("path")) {
-            this.image.put("type", "path");
-            this.image.put("data", imageData);
+        if (imageType == null || !imageType.equals("url") && !imageType.equals("path")) imageType = "url";
 
-        } else if (imageType.equals("url")) {
-            this.image.put("type", "url");
-            this.image.put("data", imageData);
-
-        } else {
-            throw new IllegalArgumentException("Not allowed image type: " + imageType + "\nYou have to specity url or path as image type.");
-        }
+        this.image.put("type", imageType);
+        this.image.put("data", imageData);
 
         return this;
     }
@@ -85,7 +70,7 @@ public class Button {
     }
 
     public Button setText(String text) {
-        this.text = text;
+        this.text = text == null ? "" : text;
         return this;
     }
 
