@@ -1,6 +1,7 @@
 package net.comorevi.cphone.plugin;
 
 import cn.nukkit.Player;
+import cn.nukkit.entity.Attribute;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerInteractEvent;
@@ -12,6 +13,7 @@ import cn.nukkit.item.ItemGhastTear;
 import cn.nukkit.network.protocol.ModalFormRequestPacket;
 import cn.nukkit.network.protocol.ModalFormResponsePacket;
 import cn.nukkit.network.protocol.NetworkStackLatencyPacket;
+import cn.nukkit.network.protocol.UpdateAttributesPacket;
 import cn.nukkit.scheduler.Task;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -114,24 +116,10 @@ class EventListener implements Listener {
             SharingData.server.getScheduler().scheduleDelayedTask(new Task() {
                 @Override
                 public void onRun(int i) {
-                    event.getPlayer().sendAttributes();
-                    System.out.println("SEND1");
-                }
-            }, 1);
-        }
-    }
-
-    @EventHandler
-    public void onSendPacket(DataPacketSendEvent event) {
-        if (event.getPacket() instanceof ModalFormRequestPacket) {
-            ModalFormRequestPacket pk = new ModalFormRequestPacket();
-            Player player = event.getPlayer();
-            SharingData.server.getScheduler().scheduleDelayedTask(new Task() {
-                @Override
-                public void onRun(int i) {
-                    if (player.isOnline()) {
-
-                    }
+                    UpdateAttributesPacket pk = new UpdateAttributesPacket();
+                    pk.entityId = event.getPlayer().getId();
+                    pk.entries = new Attribute[]{Attribute.getAttribute(Attribute.EXPERIENCE)};
+                    event.getPlayer().dataPacket(pk);
                 }
             }, 1);
         }

@@ -38,7 +38,7 @@ public class HomeActivity extends ListActivity {
 
                 String homeText = RuntimeData.config.getString("HomeText");
                 cPhone.setHomeMessage(homeText == null ? StringsData.strings.get("message_home_nonotification") : homeText);
-                ((ListResponse) response).getPlayer().sendMessage(StringsData.strings.get("message_home_closed"));
+                ((ListResponse) response).getPlayer().sendPopup(StringsData.strings.get("message_home_closed"), StringsData.strings.get("message_home_closed_subtitle"));
 
                 break;
 

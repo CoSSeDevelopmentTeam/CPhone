@@ -1,6 +1,7 @@
 package net.comorevi.cphone.presenter;
 
 import cn.nukkit.Player;
+import cn.nukkit.entity.Attribute;
 import cn.nukkit.network.protocol.ModalFormRequestPacket;
 import cn.nukkit.network.protocol.UpdateAttributesPacket;
 import cn.nukkit.scheduler.Task;
@@ -39,7 +40,10 @@ public class ActivityProcessor {
                 @Override
                 public void onRun(int i) {
                     if (player.isOnline()) {
-                        player.sendAttributes();
+                        UpdateAttributesPacket pk = new UpdateAttributesPacket();
+                        pk.entityId = player.getId();
+                        pk.entries = new Attribute[]{Attribute.getAttribute(Attribute.EXPERIENCE)};
+                        player.dataPacket(pk);
                     }
                 }
             }, 1);
