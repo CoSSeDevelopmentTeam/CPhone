@@ -9,6 +9,7 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.event.server.DataPacketSendEvent;
+import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemGhastTear;
 import cn.nukkit.network.protocol.ModalFormRequestPacket;
 import cn.nukkit.network.protocol.ModalFormResponsePacket;
@@ -142,7 +143,10 @@ class EventListener implements Listener {
             SharingData.phones.put(player.getName(), new CPhone(player));
         }
 
-        player.getInventory().setItem(0, new ItemGhastTear());
+        Item ghastTear = new ItemGhastTear();
+        ghastTear.setCustomName("しふぉん");
+
+        player.getInventory().setItem(0, ghastTear);
     }
 
     @EventHandler

@@ -29,6 +29,7 @@ public enum ApplicationPermission {
         return parents.contains(permission);
     }
 
+    // Usage: USER_PERMISSION.canAccept(APPLICATION_PERMISSION)
     public boolean canAccept(ApplicationPermission permission) {
         return (this == permission) || contains(permission);
     }
