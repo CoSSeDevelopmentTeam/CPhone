@@ -43,7 +43,7 @@ class EventListener implements Listener {
     @EventHandler
     public void onDataPacket(DataPacketReceiveEvent event) {
         if (event.getPacket() instanceof ModalFormResponsePacket) {
-            if(!(event.getPacket() instanceof ModalFormResponsePacket)) return;
+            if (!(event.getPacket() instanceof ModalFormResponsePacket)) return;
 
             ModalFormResponsePacket packet = (ModalFormResponsePacket) event.getPacket();
             int formId = packet.formId;
@@ -69,7 +69,8 @@ class EventListener implements Listener {
 
                 } else if (activity instanceof CustomActivity) {
                     CustomActivity customForm = (CustomActivity) activity;
-                    List<Object> list = new Gson().fromJson(packet.data, new TypeToken<List>(){}.getType());
+                    List<Object> list = new Gson().fromJson(packet.data, new TypeToken<List>() {
+                    }.getType());
 
                     List<Object> result = new ArrayList<>();
                     int count = 0;
@@ -131,8 +132,9 @@ class EventListener implements Listener {
 
         if (!ApplicationSQLManager.getUserNames().contains(player.getName())) {
             ApplicationPermission permission = ApplicationPermission.ATTRIBUTE_EVERYONE;
-            if (player.isOp()) permission = ApplicationPermission.ATTRIBUTE_OPERATOR;
-            if (player.getName().equals(RuntimeData.config.getString("ServerOwner"))) permission = ApplicationPermission.ATTRIBUTE_OWNER;
+            if (player.getName().equals(RuntimeData.config.getString("ServerOwner")))
+                permission = ApplicationPermission.ATTRIBUTE_OWNER;
+            else if (player.isOp()) permission = ApplicationPermission.ATTRIBUTE_OPERATOR;
             ApplicationSQLManager.addUser(player.getName(), permission);
         }
 

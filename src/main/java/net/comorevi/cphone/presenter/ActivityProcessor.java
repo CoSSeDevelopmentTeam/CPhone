@@ -1,16 +1,19 @@
 package net.comorevi.cphone.presenter;
 
+import cn.nukkit.IPlayer;
 import cn.nukkit.Player;
 import cn.nukkit.entity.Attribute;
 import cn.nukkit.network.protocol.ModalFormRequestPacket;
 import cn.nukkit.network.protocol.UpdateAttributesPacket;
 import cn.nukkit.scheduler.Task;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
+import net.comorevi.cphone.cphone.application.ApplicationPermission;
 import net.comorevi.cphone.cphone.data.ApplicationData;
 import net.comorevi.cphone.cphone.data.RuntimeData;
 import net.comorevi.cphone.cphone.data.StringsData;
 import net.comorevi.cphone.cphone.model.CustomResponse;
 import net.comorevi.cphone.cphone.model.Response;
+import net.comorevi.cphone.cphone.sql.ApplicationSQLManager;
 import net.comorevi.cphone.cphone.utils.ErrorReporter;
 import net.comorevi.cphone.cphone.utils.StringLoader;
 import net.comorevi.cphone.cphone.widget.activity.Activity;
@@ -104,4 +107,5 @@ public class ActivityProcessor {
                 break;
         }
     }
+
 }
