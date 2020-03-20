@@ -58,6 +58,12 @@ public class ActivityProcessor {
     public static void startActivity(Player player, String appName) {
         ApplicationManifest manifest = ApplicationData.applications.get(appName);
 
+        if (!ApplicationSQLManager.getPermission(player.getName()).canAccept(manifest.getPermission())) {
+            SharingData.phones.get(player.getName()).setHomeMessage(StringsData.strings.get("message_cannot_startapp_perm") + manifest.getTitle());
+            SharingData.phones.get(player.getName()).home();
+            return;
+        }
+
         try {
             Class<? extends ActivityBase> mainClass = new URLClassLoader(new URL[]{new File(RuntimeData.currentDirectory + "/app/" + manifest.getTitle() + ".jar").toURI().toURL()}, SharingData.pluginInstance.getClass().getClassLoader())
                     .loadClass(manifest.getMain())

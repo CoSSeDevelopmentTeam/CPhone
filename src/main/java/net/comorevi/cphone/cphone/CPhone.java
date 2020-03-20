@@ -1,6 +1,7 @@
 package net.comorevi.cphone.cphone;
 
 import cn.nukkit.Player;
+import net.comorevi.cphone.cphone.application.Application;
 import net.comorevi.cphone.cphone.application.ApplicationPermission;
 import net.comorevi.cphone.cphone.data.RuntimeData;
 import net.comorevi.cphone.cphone.data.StringsData;
@@ -34,7 +35,7 @@ public final class CPhone {
         int hour = cTime.get(Calendar.HOUR_OF_DAY);
         int minute = cTime.get(Calendar.MINUTE);
 
-        checkPermission();
+        ApplicationPermission.updatePermission(player);
 
         HomeActivity activity = new HomeActivity(ManifestLoader.loadManifest(this.getClass().getClassLoader().getResourceAsStream("CPhoneManifest.xml")));
         activity.setContent(year + "/" + month + "/" + date + " " + hour + ":" + minute + "\n" + StringsData.strings.get("home_notification") + ": " + homeMessage);
@@ -76,14 +77,6 @@ public final class CPhone {
 
     public Player getPlayer() {
         return player;
-    }
-
-    private void checkPermission() {
-        ApplicationPermission permission = ApplicationPermission.ATTRIBUTE_EVERYONE;
-        if (player.getName().equals(RuntimeData.config.getString("ServerOwner")))
-            permission = ApplicationPermission.ATTRIBUTE_OWNER;
-        else if (player.isOp()) permission = ApplicationPermission.ATTRIBUTE_OPERATOR;
-        ApplicationSQLManager.setPermission(player.getName(), permission);
     }
 
 }

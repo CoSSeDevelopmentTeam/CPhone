@@ -126,7 +126,7 @@ public final class ApplicationSQLManager {
 
             if (applications.contains(manifest.getTitle())) return false;
 
-            if (manifest.getPermission() != ApplicationPermission.ATTRIBUTE_DEFAULT && !getPermission(name).canAccept(manifest.getPermission())) {
+            if (!getPermission(name).canAccept(manifest.getPermission())) {
                 throw new PermissionException("Permission denied [" + name + "]: " + getPermission(name).getName() + ", Required: " + manifest.getPermission().getName());
             }
 
