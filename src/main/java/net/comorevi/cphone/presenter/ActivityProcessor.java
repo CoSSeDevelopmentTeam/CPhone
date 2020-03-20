@@ -19,10 +19,12 @@ import net.comorevi.cphone.cphone.widget.activity.ReturnType;
 import net.comorevi.cphone.cphone.widget.activity.base.ListActivity;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Collections;
 
 public class ActivityProcessor {
 
@@ -60,23 +62,13 @@ public class ActivityProcessor {
 
             Constructor<ActivityBase> constructor = (Constructor<ActivityBase>) mainClass.getConstructor(ApplicationManifest.class);
             ActivityBase activityBase = constructor.newInstance(manifest);
-            InputStream stream;
 
-            switch (player.getLoginChainData().getLanguageCode().toLowerCase()) {
-                case "ja-jp":
-                    stream = activityBase.getStringFile("strings-ja.xml");
-                    break;
+            String lang = player.getLoginChainData().getLanguageCode().toLowerCase();
 
-                case "en-us":
-                    stream = activityBase.getStringFile("strings-en.xml");
-                    break;
+            InputStream stream = activityBase.getStringFile("strings-" + lang.substring(0, 2) + ".xml");
+            if (stream == null) stream = activityBase.getStringFile("strings.xml");
 
-                default:
-                    stream = activityBase.getStringFile("strings.xml");
-                    break;
-            }
-
-            activityBase.start(player, stream != null ? StringLoader.loadString(stream) : null);
+            activityBase.start(player, stream != null ? StringLoader.loadString(stream) : Collections.emptyMap());
 
         } catch (Exception ex) {
             ErrorReporter.reportError(player.getName(), manifest.getTitle(), ex);
