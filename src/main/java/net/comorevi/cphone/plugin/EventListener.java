@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import net.comorevi.cphone.cphone.CPhone;
 import net.comorevi.cphone.cphone.application.ApplicationPermission;
 import net.comorevi.cphone.cphone.data.RuntimeData;
+import net.comorevi.cphone.cphone.data.StringsData;
 import net.comorevi.cphone.cphone.model.CustomResponse;
 import net.comorevi.cphone.cphone.model.ListResponse;
 import net.comorevi.cphone.cphone.model.ModalResponse;
@@ -144,7 +145,7 @@ class EventListener implements Listener {
         }
 
         Item ghastTear = new ItemGhastTear();
-        ghastTear.setCustomName("しふぉん");
+        ghastTear.setCustomName(StringsData.strings.get("cphone_title"));
 
         player.getInventory().setItem(0, ghastTear);
     }
