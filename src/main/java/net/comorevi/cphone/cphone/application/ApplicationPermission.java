@@ -7,11 +7,11 @@ public enum ApplicationPermission {
 
     ATTRIBUTE_DEFAULT("default"),
 
-    ATTRIBUTE_EVERYONE("everyone"),
+    ATTRIBUTE_EVERYONE("everyone", ATTRIBUTE_DEFAULT),
 
-    ATTRIBUTE_OPERATOR("operator", ATTRIBUTE_EVERYONE),
+    ATTRIBUTE_OPERATOR("operator", ATTRIBUTE_EVERYONE, ATTRIBUTE_DEFAULT),
 
-    ATTRIBUTE_OWNER("owner", ATTRIBUTE_EVERYONE, ATTRIBUTE_OPERATOR);
+    ATTRIBUTE_OWNER("owner", ATTRIBUTE_EVERYONE, ATTRIBUTE_OPERATOR, ATTRIBUTE_DEFAULT);
 
     private String name;
     private List<ApplicationPermission> parents;
