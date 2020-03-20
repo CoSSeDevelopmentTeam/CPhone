@@ -145,7 +145,7 @@ class EventListener implements Listener {
         }
 
         Item ghastTear = new ItemGhastTear();
-        ghastTear.setCustomName(StringsData.strings.get("cphone_title"));
+        ghastTear.setCustomName(StringsData.get(player, "cphone_title"));
 
         player.getInventory().setItem(0, ghastTear);
     }

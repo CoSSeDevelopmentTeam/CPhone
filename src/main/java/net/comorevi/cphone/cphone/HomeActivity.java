@@ -11,8 +11,6 @@ import net.comorevi.cphone.cphone.widget.activity.ReturnType;
 import net.comorevi.cphone.cphone.widget.activity.base.ListActivity;
 import net.comorevi.cphone.cphone.widget.element.Button;
 
-import static net.comorevi.cphone.cphone.data.StringsData.strings;
-
 public class HomeActivity extends ListActivity {
 
     private CPhone cPhone;
@@ -23,8 +21,8 @@ public class HomeActivity extends ListActivity {
 
     @Override
     public void onCreate(Bundle bundle) {
-        this.setTitle(strings.get("cphone_title"));
         this.cPhone = bundle.getCPhone();
+        this.setTitle(StringsData.get(cPhone.getPlayer(), "cphone_title"));
         init();
     }
 
@@ -37,8 +35,8 @@ public class HomeActivity extends ListActivity {
                 cPhone.setOpening(false);
 
                 String homeText = RuntimeData.config.getString("HomeText");
-                cPhone.setHomeMessage(homeText == null ? StringsData.strings.get("message_home_nonotification") : homeText);
-                ((ListResponse) response).getPlayer().sendPopup(StringsData.strings.get("message_home_closed"), StringsData.strings.get("message_home_closed_subtitle"));
+                cPhone.setHomeMessage(homeText == null ? StringsData.get(cPhone.getPlayer(), "message_home_nonotification") : homeText);
+                ((ListResponse) response).getPlayer().sendPopup(StringsData.get(cPhone.getPlayer(), "message_home_closed"), StringsData.get(cPhone.getPlayer(), "message_home_closed_subtitle"));
 
                 break;
 
@@ -58,29 +56,9 @@ public class HomeActivity extends ListActivity {
     }
 
     private void init() {
-        Button closeButton = new Button(strings.get("home_close")) {
-            @Override
-            public void onClick(Player player) {
-
-            }
-        };
-        this.addButton(closeButton);
-
-        Button restartButton = new Button(strings.get("home_restartApp")) {
-            @Override
-            public void onClick(Player player) {
-
-            }
-        };
-        this.addButton(restartButton);
-
-        Button appsButton = new Button(strings.get("home_applications")) {
-            @Override
-            public void onClick(Player player) {
-
-            }
-        };
-        this.addButton(appsButton);
+        this.addButton(new Button(StringsData.get(cPhone.getPlayer(), "home_close")));
+        this.addButton(new Button(StringsData.get(cPhone.getPlayer(), "home_restartApp")));
+        this.addButton(new Button(StringsData.get(cPhone.getPlayer(), "home_applications")));
     }
 
 }

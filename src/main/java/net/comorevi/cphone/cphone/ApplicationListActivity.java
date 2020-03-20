@@ -13,8 +13,6 @@ import net.comorevi.cphone.cphone.widget.activity.base.ListActivity;
 import net.comorevi.cphone.cphone.widget.element.Button;
 import net.comorevi.cphone.presenter.ActivityProcessor;
 
-import static net.comorevi.cphone.cphone.data.StringsData.strings;
-
 public class ApplicationListActivity extends ListActivity {
 
     private CPhone cPhone;
@@ -25,9 +23,9 @@ public class ApplicationListActivity extends ListActivity {
 
     @Override
     public void onCreate(Bundle bundle) {
-        this.setTitle(strings.get("cphone_title"));
         this.cPhone = bundle.getCPhone();
-        this.setContent(StringsData.strings.get("message_application_info"));
+        this.setTitle(StringsData.get(cPhone.getPlayer(), "cphone_title"));
+        this.setContent(StringsData.get(cPhone.getPlayer(), "message_application_info"));
         init();
     }
 

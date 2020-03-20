@@ -59,7 +59,7 @@ public class ActivityProcessor {
         ApplicationManifest manifest = ApplicationData.applications.get(appName);
 
         if (!ApplicationSQLManager.getPermission(player.getName()).canAccept(manifest.getPermission())) {
-            SharingData.phones.get(player.getName()).setHomeMessage(StringsData.strings.get("message_cannot_startapp_perm") + manifest.getTitle());
+            SharingData.phones.get(player.getName()).setHomeMessage(StringsData.get(player, "message_cannot_startapp_perm") + manifest.getTitle());
             SharingData.phones.get(player.getName()).home();
             return;
         }
@@ -81,7 +81,7 @@ public class ActivityProcessor {
 
         } catch (Exception ex) {
             ErrorReporter.reportError(player.getName(), manifest.getTitle(), ex);
-            SharingData.phones.get(player.getName()).setHomeMessage(StringsData.strings.get("message_application_error_start") + manifest.getTitle());
+            SharingData.phones.get(player.getName()).setHomeMessage(StringsData.get(player, "message_application_error_start") + manifest.getTitle());
             SharingData.phones.get(player.getName()).home();
         }
     }

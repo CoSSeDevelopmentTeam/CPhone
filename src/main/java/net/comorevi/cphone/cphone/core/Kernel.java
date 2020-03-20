@@ -32,7 +32,6 @@ final class Kernel implements Runnable {
 
         prepareConfig(RuntimeData.currentDirectory + "/configuration.properties");
 
-        StringsData.strings = StringLoader.loadString(this.getClass().getClassLoader().getResourceAsStream("strings-ja.xml"));
         SharingData.triggerItemId = RuntimeData.config.getInt("TriggerItemId");
         SharingData.phones = new HashMap<>();
         SharingData.activities = new HashMap<>();
@@ -66,7 +65,7 @@ final class Kernel implements Runnable {
         if (usedMemory * 100 / (double) RuntimeData.maxMemory > 80) {
             SharingData.phones.values().forEach(phone -> {
                 phone.setActivity(null);
-                phone.setHomeMessage(StringsData.strings.get("message_home_suspendappreset"));
+                phone.setHomeMessage(StringsData.get(phone.getPlayer(), "message_home_suspendappreset"));
             });
         }
     }

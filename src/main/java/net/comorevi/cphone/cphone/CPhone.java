@@ -22,7 +22,7 @@ public final class CPhone {
         this.player = player;
 
         String homeText = RuntimeData.config.getString("HomeText");
-        setHomeMessage(homeText == null ? StringsData.strings.get("message_home_nonotification") : homeText);
+        setHomeMessage(homeText == null ? StringsData.get(player, "message_home_nonotification") : homeText);
     }
 
     public void home() {
@@ -38,7 +38,7 @@ public final class CPhone {
         ApplicationPermission.updatePermission(player);
 
         HomeActivity activity = new HomeActivity(ManifestLoader.loadManifest(this.getClass().getClassLoader().getResourceAsStream("CPhoneManifest.xml")));
-        activity.setContent(year + "/" + month + "/" + date + " " + hour + ":" + minute + "\n" + StringsData.strings.get("home_notification") + ": " + homeMessage);
+        activity.setContent(year + "/" + month + "/" + date + " " + hour + ":" + minute + "\n" + StringsData.get(player, "home_notification") + ": " + homeMessage);
         activity.start(player, null);
     }
 
@@ -48,7 +48,7 @@ public final class CPhone {
 
     public boolean back() {
         if (activity == null) {
-            setHomeMessage(StringsData.strings.get("message_home_noback"));
+            setHomeMessage(StringsData.get(player, "message_home_noback"));
             home();
             return false;
 
