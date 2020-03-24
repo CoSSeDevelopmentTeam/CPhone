@@ -77,4 +77,8 @@ public final class CPhone {
         return player;
     }
 
+    public String getRegion() {
+        return player.getLoginChainData().getLanguageCode().substring(0, 2);
+    }
+
 }
