@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<manifest>
+    <application>
+        <title>SampleFile</title>
+        <description>This is a sample ApplicationManifest.xml file for CPhone applications.</description>
+        <author>itsu</author>
+        <version>1.0.0</version>
+        <mcbeversion>1.14.0</mcbeversion>
+        <icon>https://pbs.twimg.com/profile_images/1201136789492092930/8SfNTu5G_400x400.jpg</icon>
+        <iconType>url</iconType>
+    </application>
+
+    <permission type = "default" />
+
+    <activity>
+        <name>MainActivity</name>
+        <main>dev.itsu.sampleapp.MainActivity</main>
+    </activity>
+
+    <external-lang>
+        <lang region="en">
+            <title>SampleFile</title>
+            <description>This is a sample ApplicationManifest.xml file for CPhone applications.</description>
+        </lang>
+        <lang region="ja">
+            <title>サンプルファイル</title>
+            <description>これはCPhoneアプリ用のApplicationManifest.xmlファイルです。</description>
+        </lang>
+    </external-lang>
+</manifest>

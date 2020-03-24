@@ -1,14 +1,19 @@
 package net.comorevi.cphone.cphone.application;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ApplicationManifest implements Serializable {
 
     private String title;
+    private Map<String, String> titles;
     private String version;
     private String mcbeVersion;
     private String main;
     private String description;
+    private Map<String, String> descriptions;
     private String author;
     private String icon;
     private String iconType;
@@ -18,7 +23,8 @@ public class ApplicationManifest implements Serializable {
     private boolean isVisible = true;
 
     public ApplicationManifest() {
-
+        titles = new HashMap<>();
+        descriptions = new HashMap<>();
     }
 
     public String getTitle() {
@@ -57,8 +63,8 @@ public class ApplicationManifest implements Serializable {
         return description;
     }
 
-    public void setDescription(String decription) {
-        this.description = decription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getAuthor() {
@@ -117,20 +123,49 @@ public class ApplicationManifest implements Serializable {
         this.permission = attribute;
     }
 
+    public String getTitleByRegion(String region) {
+        String title = titles.get(region);
+        return title == null ? this.title : title;
+    }
+
+    public void setTitles(Map<String, String> titles) {
+        this.titles = titles;
+    }
+
+    public void addTitle(String region, String value) {
+        this.titles.put(region, value);
+    }
+
+    public String getDescriptionByRegion(String region) {
+        String description = descriptions.get(region);
+        return description == null ? this.description : description;
+    }
+
+    public void setDescriptions(Map<String, String> descriptions) {
+        this.descriptions = descriptions;
+    }
+
+    public void addDescription(String region, String value) {
+        this.descriptions.put(region, value);
+    }
+
     @Override
     public String toString() {
         return "ApplicationManifest{" +
                 "title='" + title + '\'' +
+                ", titles=" + titles +
                 ", version='" + version + '\'' +
                 ", mcbeVersion='" + mcbeVersion + '\'' +
                 ", main='" + main + '\'' +
                 ", description='" + description + '\'' +
+                ", descriptions=" + descriptions +
                 ", author='" + author + '\'' +
                 ", icon='" + icon + '\'' +
+                ", iconType='" + iconType + '\'' +
                 ", initialize='" + initialize + '\'' +
-                ", permission='" + permission.getName() + '\'' +
+                ", permission=" + permission +
                 ", price=" + price +
-                ", isVisible='" + isVisible +
+                ", isVisible=" + isVisible +
                 '}';
     }
 }

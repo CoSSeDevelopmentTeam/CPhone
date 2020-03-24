@@ -1,11 +1,9 @@
 package net.comorevi.cphone.cphone;
 
 import cn.nukkit.Player;
-import net.comorevi.cphone.cphone.application.Application;
 import net.comorevi.cphone.cphone.application.ApplicationPermission;
 import net.comorevi.cphone.cphone.data.RuntimeData;
 import net.comorevi.cphone.cphone.data.StringsData;
-import net.comorevi.cphone.cphone.sql.ApplicationSQLManager;
 import net.comorevi.cphone.cphone.utils.ManifestLoader;
 import net.comorevi.cphone.cphone.widget.activity.Activity;
 
@@ -37,7 +35,7 @@ public final class CPhone {
 
         ApplicationPermission.updatePermission(player);
 
-        HomeActivity activity = new HomeActivity(ManifestLoader.loadManifest(this.getClass().getClassLoader().getResourceAsStream("CPhoneManifest.xml")));
+        HomeActivity activity = new HomeActivity(ManifestLoader.loadManifest(this.getClass().getClassLoader().getResourceAsStream("ApplicationManifest.xml")));
         activity.setContent(year + "/" + month + "/" + date + " " + hour + ":" + minute + "\n" + StringsData.get(player, "home_notification") + ": " + homeMessage);
         activity.start(player, null);
     }

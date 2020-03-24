@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-        <!DOCTYPE manifest [
-                <!ELEMENT manifest (mainactivity*, permission, application)>
-
-                <!ELEMENT application (title, description, price, author, version, mcbeversion, icon)>
-                <!ELEMENT title (#PCDATA)>
-                <!ELEMENT description (#PCDATA)>
-                <!ELEMENT author (#PCDATA)>
-                <!ELEMENT version (#PCDATA)>
-                <!ELEMENT mcbeversion (#PCDATA)>
-                <!ELEMENT icon (#PCDATA)>
-                <!ELEMENT price (#PCDATA)>
-
-                <!ELEMENT permission EMPTY>
-                <!ATTLIST permission type CDATA #REQUIRED>
-
-                <!ELEMENT mainactivity (name, main)>
-                <!ELEMENT name (#PCDATA)>
-                <!ELEMENT main (#PCDATA)>
-
+<!DOCTYPE manifest [
+        <!ELEMENT manifest (application|permission|activity|external-lang)*>
+        <!ELEMENT application (title|description|author|version|mcbeversion|icon|iconType)*>
+        <!ELEMENT title (#PCDATA)>
+        <!ELEMENT description (#PCDATA)>
+        <!ELEMENT author (#PCDATA)>
+        <!ELEMENT version (#PCDATA)>
+        <!ELEMENT mcbeversion (#PCDATA)>
+        <!ELEMENT icon (#PCDATA)>
+        <!ELEMENT iconType (#PCDATA)>
+        <!ELEMENT permission (#PCDATA)>
+        <!ATTLIST permission
+                type CDATA #REQUIRED>
+        <!ELEMENT activity (name|main)*>
+        <!ELEMENT name (#PCDATA)>
+        <!ELEMENT main (#PCDATA)>
+        <!ELEMENT external-lang (lang)*>
+        <!ELEMENT lang (title|description)*>
+        <!ATTLIST lang
+                region CDATA #IMPLIED
+                religion CDATA #IMPLIED>
         ]>
