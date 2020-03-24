@@ -4,9 +4,10 @@
 <p align="center">Nukkit向け疑似スマートフォンシステム</p>
 <hr>
 
-日本語 [English]()  
+![LICENSE](https://img.shields.io/github/license/CoSSeDevelopmentTeam/CPhone)
+![VERSION](https://img.shields.io/github/v/release/CoSSeDevelopmentTeam/CPhone)
   
-Nukkit向け疑似スマートフォンシステム
+日本語 [English]()  
 
 # 特徴
 ✔ ライフサイクルを用いたフォームの設計  
