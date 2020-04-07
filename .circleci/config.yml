@@ -19,4 +19,4 @@
        - store_test_results:
            path: target/surefire-reports
        - store_artifacts:
-           path: target/CPhone-1.3.5-SNAPSHOT.jar
+           path: target/CPhone-1.3.6-SNAPSHOT.jar

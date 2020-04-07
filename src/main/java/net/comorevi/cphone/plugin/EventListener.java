@@ -22,6 +22,7 @@ import net.comorevi.cphone.cphone.CPhone;
 import net.comorevi.cphone.cphone.application.ApplicationPermission;
 import net.comorevi.cphone.cphone.data.RuntimeData;
 import net.comorevi.cphone.cphone.data.StringsData;
+import net.comorevi.cphone.cphone.event.CPhoneOpenEvent;
 import net.comorevi.cphone.cphone.model.CustomResponse;
 import net.comorevi.cphone.cphone.model.ListResponse;
 import net.comorevi.cphone.cphone.model.ModalResponse;
@@ -160,8 +161,11 @@ class EventListener implements Listener {
         Player player = event.getPlayer();
         if (player.getInventory().getItemInHand().getId() == SharingData.triggerItemId) {
             if (!SharingData.phones.get(player.getName()).isOpening()) {
-                SharingData.phones.get(player.getName()).home();
-                SharingData.phones.get(player.getName()).setOpening(true);
+                CPhoneOpenEvent e = new CPhoneOpenEvent(SharingData.phones.get(player.getName()));
+                SharingData.server.getPluginManager().callEvent(e);
+                if (!e.isCancelled()) {
+                    SharingData.phones.get(player.getName()).open();
+                }
             }
         }
     }

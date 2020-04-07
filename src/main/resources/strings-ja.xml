@@ -6,6 +6,9 @@
     <string name="home_applications">アプリ</string>
     <string name="home_settings">設定</string>
 
+    <string name="back_to_previous">前に戻る</string>
+    <string name="back_to_home">ホームに戻る</string>
+
     <string name="message_home_nonotification">おしらせはありません。</string>
     <string name="message_home_noback">§b実行されているアプリはありません。</string>
     <string name="message_home_suspendappreset">メモリ確保のため、一時停止されたアプリは破棄されました。</string>

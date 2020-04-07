@@ -6,6 +6,7 @@ import net.comorevi.cphone.cphone.utils.StringLoader;
 import java.util.HashMap;
 import java.util.Map;
 
+// This class is used by CPhone internal system, so third-party applications should use Bundle#getString(key, args...)
 public class StringsData {
 
     private static Map<String, Map<String, String>> strings = new HashMap<>();

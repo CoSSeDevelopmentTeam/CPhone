@@ -6,7 +6,7 @@
 
     <groupId>net.comorevi</groupId>
     <artifactId>CPhone</artifactId>
-    <version>1.3.5-SNAPSHOT</version>
+    <version>1.3.6-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

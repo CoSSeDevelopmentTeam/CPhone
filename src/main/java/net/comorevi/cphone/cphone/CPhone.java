@@ -77,6 +77,11 @@ public final class CPhone {
         return player;
     }
 
+    public void open() {
+        home();
+        setOpening(true);
+    }
+
     public String getRegion() {
         return player.getLoginChainData().getLanguageCode().substring(0, 2);
     }

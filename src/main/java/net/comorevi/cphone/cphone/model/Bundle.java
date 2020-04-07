@@ -1,6 +1,8 @@
 package net.comorevi.cphone.cphone.model;
 
 import net.comorevi.cphone.cphone.CPhone;
+import net.comorevi.cphone.cphone.data.StringsData;
+import net.comorevi.cphone.cphone.utils.StringUtils;
 
 import java.io.File;
 import java.io.Serializable;
@@ -36,8 +38,15 @@ public final class Bundle implements Serializable {
         return currentDir;
     }
 
-    public String getString(String name) {
-        return strings.get(name);
+    public String getString(String name, Object...args) {
+        if (name == null) return "null";
+
+        String data = strings.get(name);
+        if (name.startsWith("cphone:")) {
+            name = StringsData.get(cphone.getPlayer(), name.replaceFirst("cphone:", ""));
+        }
+
+        return data == null ? "${" + name + "}" : StringUtils.format(data, args);
     }
 
     public Map<String, String> getStrings() {
