@@ -1,10 +1,11 @@
 package net.comorevi.cphone.cphone.event;
 
+import cn.nukkit.event.Cancellable;
 import cn.nukkit.event.Event;
 import cn.nukkit.event.HandlerList;
 import net.comorevi.cphone.cphone.CPhone;
 
-public class CPhoneOpenEvent extends Event {
+public class CPhoneOpenEvent extends Event implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
     private CPhone cPhone;
