@@ -54,7 +54,7 @@ class ApplicationLoader {
                 SharingData.server.getLogger().info("Loaded: " + manifest.getTitle());
 
             } catch (ClassNotFoundException e) {
-                SharingData.server.getLogger().alert(file.getName().replaceAll(".jar", "") + " main class is not found.");
+                SharingData.server.getLogger().alert(file.getName().replaceAll(".jar", "") + " initializer class does not found.");
 
             } catch (ClassCastException e) {
                 SharingData.server.getLogger().alert(file.getName().replaceAll(".jar", "") + " must be sub class of ApplicationBase.");
