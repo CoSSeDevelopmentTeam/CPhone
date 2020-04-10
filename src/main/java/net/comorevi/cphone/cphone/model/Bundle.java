@@ -38,6 +38,10 @@ public final class Bundle implements Serializable {
         return currentDir;
     }
 
+    public String getString(String name) {
+        return getString(name, new Object[0]);
+    }
+
     public String getString(String name, Object...args) {
         if (name == null) return "null";
 
