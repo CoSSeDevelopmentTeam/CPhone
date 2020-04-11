@@ -11,6 +11,7 @@ import net.comorevi.cphone.cphone.widget.activity.base.ModalActivity;
 public class MessageActivity extends ModalActivity {
 
     private String text;
+    private String title = "CPhone";
     private String button1;
     private String button2;
     private ActivityBase[] starts;
@@ -20,6 +21,7 @@ public class MessageActivity extends ModalActivity {
     public void onCreate(Bundle bundle) {
         this.bundle = bundle;
 
+        this.setTitle(title);
         this.setContent(text);
         this.setButton1Text(button1);
         this.setButton2Text(button2);
@@ -44,8 +46,14 @@ public class MessageActivity extends ModalActivity {
         return ReturnType.TYPE_END;
     }
 
+
     public MessageActivity(ApplicationManifest manifest, String text, String button1, String button2, ActivityBase... starts) {
+        this(manifest, "CPhone", text, button1, button2, starts);
+    }
+
+    public MessageActivity(ApplicationManifest manifest, String title, String text, String button1, String button2, ActivityBase... starts) {
         super(manifest);
+        this.title = title;
         this.text = text;
         this.button1 = button1;
         this.button2 = button2;
