@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.entity.Attribute;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
+import cn.nukkit.event.inventory.InventoryClickEvent;
 import cn.nukkit.event.player.PlayerDropItemEvent;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
@@ -12,6 +13,7 @@ import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.event.server.DataPacketSendEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemGhastTear;
+import cn.nukkit.item.ItemID;
 import cn.nukkit.network.protocol.ModalFormRequestPacket;
 import cn.nukkit.network.protocol.ModalFormResponsePacket;
 import cn.nukkit.network.protocol.NetworkStackLatencyPacket;
@@ -169,6 +171,16 @@ class EventListener implements Listener {
                 }
             }
         }
+    }
+
+    @EventHandler
+    public void onPlayerItemDrop(PlayerDropItemEvent event) {
+        if (event.getItem().getId() == SharingData.triggerItemId) event.setCancelled();
+    }
+
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event) {
+        if (event.getHeldItem().getId() == SharingData.triggerItemId || event.getSourceItem().getId() == SharingData.triggerItemId) event.setCancelled();
     }
 
 }
