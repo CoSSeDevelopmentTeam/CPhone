@@ -8,7 +8,7 @@ import java.util.Map;
 
 public final class ApplicationData {
 
-    public final static Map<String, ApplicationManifest> applications = new HashMap<>();
+    public static Map<String, ApplicationManifest> applications = new HashMap<>();
 
     public final static Map<String, ApplicationInstance> instances = new HashMap<>();
 
