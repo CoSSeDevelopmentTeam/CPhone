@@ -13,7 +13,6 @@
     <string name="message_home_noback">§b実行されているアプリはありません。</string>
     <string name="message_home_suspendappreset">メモリ確保のため、一時停止されたアプリは破棄されました。</string>
     <string name="message_home_closed">§7しふぉんを閉じました。</string>
-    <string name="message_home_closed_subtitle">システム</string>
     <string name="message_application_error_start">§eアプリを実行中にエラーが発生しました。: </string>
     <string name="message_application_info">アプリ一覧 </string>
     <string name="message_cannot_startapp_perm">§cアプリケーションを起動するための権限がありません。: </string>

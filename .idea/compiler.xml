@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="CPhone" target="10" />
+      <module name="CPhone" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

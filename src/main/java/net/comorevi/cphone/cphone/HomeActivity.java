@@ -10,6 +10,7 @@ import net.comorevi.cphone.cphone.model.Response;
 import net.comorevi.cphone.cphone.widget.activity.ReturnType;
 import net.comorevi.cphone.cphone.widget.activity.base.ListActivity;
 import net.comorevi.cphone.cphone.widget.element.Button;
+import net.comorevi.cphone.presenter.SharingData;
 
 public class HomeActivity extends ListActivity {
 
@@ -36,7 +37,7 @@ public class HomeActivity extends ListActivity {
 
                 String homeText = RuntimeData.config.getString("HomeText");
                 cPhone.setHomeMessage(homeText == null ? StringsData.get(cPhone.getPlayer(), "message_home_nonotification") : homeText);
-                ((ListResponse) response).getPlayer().sendPopup(StringsData.get(cPhone.getPlayer(), "message_home_closed"), StringsData.get(cPhone.getPlayer(), "message_home_closed_subtitle"));
+                ((ListResponse) response).getPlayer().sendTip(StringsData.get(cPhone.getPlayer(), "message_home_closed"));
 
                 break;
 
