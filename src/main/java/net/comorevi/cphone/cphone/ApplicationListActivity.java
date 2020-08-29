@@ -11,6 +11,7 @@ import net.comorevi.cphone.cphone.sql.ApplicationSQLManager;
 import net.comorevi.cphone.cphone.widget.activity.ReturnType;
 import net.comorevi.cphone.cphone.widget.activity.base.ListActivity;
 import net.comorevi.cphone.cphone.widget.element.Button;
+import net.comorevi.cphone.cphone.widget.element.ButtonImage;
 import net.comorevi.cphone.presenter.ActivityProcessor;
 
 public class ApplicationListActivity extends ListActivity {
@@ -44,7 +45,7 @@ public class ApplicationListActivity extends ListActivity {
         ApplicationSQLManager.getApplications(cPhone.getPlayer().getName()).forEach(appName -> {
             ApplicationManifest manifest = ApplicationData.applications.get(appName);
             if (manifest.isVisible()) {
-                Button applicationButton = new Button(manifest.getTitleByRegion(cPhone.getRegion()), manifest.getIconType() == null ? "url" : manifest.getIconType(), manifest.getIcon()) {
+                Button applicationButton = new Button(manifest.getTitleByRegion(cPhone.getRegion()), new ButtonImage(manifest.getIconType() == null ? ButtonImage.ImageType.URL : ButtonImage.ImageType.getTypeByString(manifest.getIconType()), manifest.getIcon())) {
                     @Override
                     public void onClick(Player player) {
                         ActivityProcessor.startActivity(player, appName);

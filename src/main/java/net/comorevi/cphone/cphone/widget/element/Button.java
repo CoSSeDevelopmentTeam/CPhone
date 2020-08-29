@@ -9,14 +9,11 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Button {
 
-    private final String type = "button";
-    private String text;
-    private Map<String, Object> image = new HashMap<>();
+    private String text = "";
+    private ButtonImage image = null;
 
     public Button() {
         this("");
@@ -24,25 +21,15 @@ public class Button {
 
     public Button(String text) {
         this.text = text;
-        image.put("data", "");
-        image.put("type", "");
     }
 
-    public Button(String text, String imageType, String imageData) {
-        this.text = text == null ? "" : text;
-
-        if (imageType == null || !imageType.equals("url") && !imageType.equals("path")) imageType = "url";
-
-        this.image.put("type", imageType);
-        this.image.put("data", imageData);
+    public Button(String text, ButtonImage image) {
+        this.text = text;
+        if (!image.getType().getTypeString().equals("") && !image.getData().equals("")) this.image = image;
     }
 
-    public Button setImage(String imageType, String imageData) {
-
-        if (imageType == null || !imageType.equals("url") && !imageType.equals("path")) imageType = "url";
-
-        this.image.put("type", imageType);
-        this.image.put("data", imageData);
+    public Button setImage(ButtonImage image) {
+        if (!image.getType().getTypeString().equals("") && !image.getData().equals("")) this.image = image;
 
         return this;
     }
@@ -82,7 +69,7 @@ public class Button {
         return "Button";
     }
 
-    public Map<String, Object> getImage() {
+    public ButtonImage getImage() {
         return image;
     }
 

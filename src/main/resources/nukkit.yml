@@ -1,6 +1,6 @@
 name: CPhone
 main: net.comorevi.cphone.plugin.Main
-version: 1.3.10
+version: 1.3.11
 author: itsu
 authors: ["popkechupki"]
 api: ["1.0.0"]

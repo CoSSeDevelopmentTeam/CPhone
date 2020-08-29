@@ -71,7 +71,13 @@ public abstract class ListActivity extends ActivityBase {
         for(Button button : buttons) {
             Map<String, Object> map = new HashMap<>();
             map.put("text", button.getText());
-            map.put("data", button.getImage());
+
+            if (button.getImage() != null) {
+                Map<String, Object> subMap = new HashMap<>();
+                subMap.put("type", button.getImage().getType().getTypeString());
+                subMap.put("data", button.getImage().getData());
+                map.put("image", subMap);
+            }
             list.add(map);
         }
 
