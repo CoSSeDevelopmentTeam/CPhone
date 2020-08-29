@@ -5,6 +5,7 @@
 <hr>
 
 ![LICENSE](https://img.shields.io/github/license/CoSSeDevelopmentTeam/CPhone)
+[![<ORG_NAME>](https://circleci.com/gh/CoSSeDevelopmentTeam/CPhone.svg?style=shield)](<LINK>)
 ![VERSION](https://img.shields.io/github/v/release/CoSSeDevelopmentTeam/CPhone)
   
 日本語 [English]()  
